@@ -18,52 +18,60 @@ const AuthProvider = ({ children }) => {
 
   // List of public routes that don't require authentication
   const publicRoutes = ['/login', '/register', '/forgot-password', '/reset-password', '/send-verify-otp', '/verify-email'];
+  
+  // Check if current route is public
+  const isPublicRoute = publicRoutes.includes(location.pathname);
 
   const checkAndRefreshToken = useCallback(async () => {
     try {
-      // Skip auth check for public routes
-      if (publicRoutes.includes(location.pathname)) {
-        setInternalLoading(false);
-        return;
-      }
-
-      // First check if server has restarted
-      const serverRestarted = await checkServerRestart();
-      if (serverRestarted) {
-        // Server restarted, user needs to login again
-        setInternalLoading(false);
-        return;
-      }
-
-      // Only attempt refresh if we don't have an access token
-      if (!accessToken) {
-        const { success } = await refreshAccessToken();
-        if (!success) {
+      // For protected routes only, attempt auth operations
+      if (!isPublicRoute) {
+        // First check if server has restarted
+        const serverRestarted = await checkServerRestart();
+        if (serverRestarted) {
+          // Server restarted, user needs to login again
+          setInternalLoading(false);
           return;
+        }
+
+        // Only attempt refresh if we don't have an access token
+        if (!accessToken) {
+          const { success } = await refreshAccessToken();
+          if (!success) {
+            setInternalLoading(false);
+            return;
+          }
         }
       }
     } catch (error) {
-      // Handle 401/403 errors by redirecting to login
+      console.error('Auth check error:', error);
+      // Handle 401/403 errors gracefully
       if (error.response?.status === 401 || error.response?.status === 403) {
-        return;
+        // Do nothing for public routes
       }
     } finally {
       setInternalLoading(false);
     }
-  }, [accessToken, refreshAccessToken, location.pathname, checkServerRestart]);
+  }, [accessToken, refreshAccessToken, isPublicRoute, checkServerRestart]);
 
   // Initial auth check when app loads
   useEffect(() => {
+    if (isPublicRoute) {
+      // For public routes, immediately stop loading
+      setInternalLoading(false);
+      return;
+    }
+    
     if (hasHydrated) {
       checkAndRefreshToken();
     } else {
       // If not hydrated, still set loading to false after a timeout
       const timeout = setTimeout(() => {
         setInternalLoading(false);
-      }, 2000);
+      }, 1000);
       return () => clearTimeout(timeout);
     }
-  }, [hasHydrated, checkAndRefreshToken]);
+  }, [hasHydrated, checkAndRefreshToken, isPublicRoute]);
 
   // Fallback if hydration never triggers
   useEffect(() => {
@@ -71,13 +79,13 @@ const AuthProvider = ({ children }) => {
       if (!hasHydrated) {
         setHasHydrated();
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, [hasHydrated, setHasHydrated]);
 
-  // Show spinner only during initial load
-  if (internalLoading && hasHydrated) {
+  // Show spinner only during initial load for protected routes
+  if (internalLoading && hasHydrated && !isPublicRoute) {
     return <Spinner />;
   }
 

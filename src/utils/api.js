@@ -27,8 +27,14 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     
-    // If error is 401 and we haven't already tried to refresh
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Don't attempt refresh for certain endpoints
+    const noRefreshEndpoints = ['/auth/refresh', '/auth/server-time', '/auth/register', '/auth/login'];
+    const isNoRefreshEndpoint = noRefreshEndpoints.some(endpoint => 
+      originalRequest.url?.includes(endpoint)
+    );
+    
+    // If error is 401 and we haven't already tried to refresh and it's not a no-refresh endpoint
+    if (error.response?.status === 401 && !originalRequest._retry && !isNoRefreshEndpoint) {
       originalRequest._retry = true;
       
       try {

@@ -14,6 +14,7 @@ export const useAuthStore = create(
       error: null,
       hasHydrated: false,
       serverStartTime: null,
+      isRefreshing: false,
       setHasHydrated: () => set({ hasHydrated: true }),
 
       setAccessToken: (token) => {
@@ -27,8 +28,19 @@ export const useAuthStore = create(
       // Check if server has restarted and clear auth if needed
       checkServerRestart: async () => {
         try {
-          const response = await api.get("/auth/server-time");
-          const serverTime = response.data.serverStartTime;
+          // Use fetch instead of api to avoid interceptors
+          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+          const response = await fetch(`${apiUrl}/api/auth/server-time`, {
+            method: 'GET',
+            credentials: 'include'
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const data = await response.json();
+          const serverTime = data.serverStartTime;
           const currentServerTime = get().serverStartTime;
           
           // If server time is different or doesn't exist, server has restarted
@@ -44,14 +56,19 @@ export const useAuthStore = create(
           }
           return false; // Server didn't restart
         } catch (error) {
-          // If we can't reach the server, assume it restarted
-          set({ 
-            user: null, 
-            accessToken: null, 
-            isAuthenticated: false,
-            serverStartTime: null 
-          });
-          return true;
+          console.warn('Could not check server restart status:', error.message);
+          // Only clear auth if we have a token but server is unreachable
+          const currentToken = get().accessToken;
+          if (currentToken) {
+            set({ 
+              user: null, 
+              accessToken: null, 
+              isAuthenticated: false,
+              serverStartTime: null 
+            });
+            return true;
+          }
+          return false; // Don't clear auth if no token exists
         }
       },
 
@@ -235,7 +252,14 @@ export const useAuthStore = create(
         }
       },
       refreshAccessToken: async () => {
+        // Prevent cascading refresh calls
+        const state = get();
+        if (state.isRefreshing) {
+          return { success: false, message: 'Already refreshing' };
+        }
+        
         try {
+          set({ isRefreshing: true });
           const response = await api.get("/auth/refresh");
           const { accessToken, user, serverStartTime } = response.data;
 
@@ -251,6 +275,7 @@ export const useAuthStore = create(
             loading: false,
             error: null,
             serverStartTime: serverStartTime || Date.now(),
+            isRefreshing: false,
           });
 
           return { success: true };
@@ -261,6 +286,7 @@ export const useAuthStore = create(
             isAuthenticated: false,
             loading: false,
             error: null,
+            isRefreshing: false,
           });
           return { success: false };
         }
