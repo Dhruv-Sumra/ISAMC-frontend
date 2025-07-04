@@ -553,7 +553,9 @@ const Admin = () => {
 
   // Function to check if current user is admin
   const isAdmin = () => {
-    return user?.role === 'admin';
+    // Check both role-based and email-based admin access
+    const adminEmails = ['dhruvsumra13@gmail.com']; // Add admin emails here
+    return user?.role === 'admin' || adminEmails.includes(user?.email);
   };
 
   if (loading) {
