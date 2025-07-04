@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import api from "../utils/api"; 
+import api from "../utils/api";
 
 const Login = () => {
   const handleGoogleLogin = () => {
@@ -121,14 +121,14 @@ const Login = () => {
         </form>
         <p className="text-sm mt-4 text-center text-gray-600 dark:text-gray-400">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 hover:underline">
+          <Link to="/register" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
         <p className="text-sm mt-1 text-center text-gray-600 dark:text-gray-400">
-          <a href="/forgot-password" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 hover:underline">
+          <Link to="/forgot-password" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 hover:underline">
             Forgot Password?
-          </a>
+          </Link>
         </p>
       </div>
     </div>

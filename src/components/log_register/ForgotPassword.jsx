@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -68,9 +68,9 @@ const ForgotPassword = () => {
         </form>
         <p className="text-sm mt-4 text-center text-gray-600">
           Remember your password?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <Link to="/login" className="text-blue-500 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
