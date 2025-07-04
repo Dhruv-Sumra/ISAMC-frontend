@@ -25,11 +25,12 @@ import Admin from './pages/Admin';
 import VanillaLiquidGlass from './components/ui/VanillaLiquidGlass';
 import useLiquidGlassStore from './store/useLiquidGlassStore';
 import './styles/toast.css';
+import { useLocation } from "react-router-dom";
 // import GujaratMap from "./components/resources/GujaratMap";
 
 function App() {
   const { isLiquidGlassActive, liquidGlassWidth, liquidGlassHeight } = useLiquidGlassStore();
-
+  const location = useLocation(); 
   return (
     <Router>
       <AuthProvider>
@@ -60,7 +61,8 @@ function App() {
             </Routes>
           </main>
 
-          <Footer />
+          {location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password" || location.pathname === "/reset-password" || location.pathname === "/verify-email" || location.pathname === "/send-verify-otp" ? null : <Footer />}
+
         </div>
 
         {/* Global Liquid Glass Effect */}
