@@ -1,0 +1,580 @@
+{
+  "Mission": [
+    {
+      "id": 1,
+      "img": "https://devdiscourse.blob.core.windows.net/devnews/18_03_2025_18_11_57_2408806.png",
+      "title": "Pioneering India’s AM Breakthroughs",
+      "body": "IIT-led research in metal/polymer 3D printing, AI-driven design, and sustainable manufacturing"
+    },
+    {
+      "id": 2,
+      "img": "https://s24806.pcdn.co/wp-content/uploads/2023/06/BridgeLabs-PegasusPark_Interior_vertical-970.jpg",
+      "title": "Bridging Labs & Factories",
+      "body": "Turning academic R&D into real-world solutions with TATA, DRDO, and global partners."
+    },
+    {
+      "id": 3,
+      "img": "https://i0.wp.com/amchronicle.com/wp-content/uploads/2023/02/Additive-Manufacturing-Unit-or-3D-printer-Al-Seer-Marine-photo.jpg?ssl=1",
+      "title": "Open-Access AM Leadership",
+      "body": "Conferences, workshops, and journals to democratize 3D printing knowledge."
+    }
+  ],
+
+  "aboutMission": [
+    {
+      "id": 101,
+      "img": "https://cdn-icons-png.flaticon.com/128/6671/6671991.png",
+      "title": "Advancing Scientific Excellence",
+      "body": "ISAMC is committed to cutting-edge research, education, and innovation that drive real-world solutions. We empower visionary minds to explore, create, and redefine possibilities"
+    },
+    {
+      "id": 102,
+      "img": "https://cdn-icons-png.flaticon.com/128/11485/11485932.png",
+      "title": "Shaping the Future Through Innovation",
+      "body": "We strive to make scientific progress accessible, fostering collaboration and breakthrough discoveries that impact healthcare, technology, and sustainability."
+    },
+    {
+      "id": 103,
+      "img": "https://cdn-icons-png.flaticon.com/128/1126/1126453.png",
+      "title": "Integrity, Creativity & Excellence",
+      "body": "Our foundation is built on curiosity, bold ideas, and problem-solving, inspiring the next generation of leaders and innovators."
+    }
+  ],
+
+  "leadership": [
+    {
+      "id": 104,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Dr. Ravi Kumar",
+      "post": "President",
+      "expertise": "Additive Manufacturing, Material Science"
+    },
+    {
+      "id": 105,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Prof. Megha Sharma",
+      "post": "Vice President",
+      "expertise": "Additive Manufacturing, Material Science"
+    },
+    {
+      "id": 106,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Mr. Arjun Verma",
+      "post": "Secretary",
+      "expertise": "Industry Regulations, 3D Printing Technologies"
+    },
+    {
+      "id": 107,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Dr. Pooja Mishra",
+      "post": "Treasurer",
+      "expertise": "Metal Additive Manufacturing, Smart Materials"
+    },
+    {
+      "id": 108,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Prof. Manish Joshi",
+      "post": "Technical Head",
+      "expertise": "CAD & Simulation, Computational Mechanics"
+    },
+    {
+      "id": 109,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Ms. Sneha Kapoor",
+      "post": "Research Coordinator",
+      "expertise": "Nano-materials, Surface Engineering"
+    },
+    {
+      "id": 110,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Dr. Neeraj Patel",
+      "post": "Innovation Head",
+      "expertise": "AI in Manufacturing, Process Optimization"
+    },
+    {
+      "id": 111,
+      "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "fullName": "Mr. Rajesh Desai",
+      "post": "Industry Liaison Officer",
+      "expertise": "Business Strategy, Industrial Applications"
+    }
+  ],
+
+  "tier": [
+    {
+      "id":112,
+      "img":"https://cdn-icons-png.flaticon.com/128/3135/3135810.png",
+      "type":"Student Membership",
+      "time_period":"1 Year",
+      "price":25000
+    },
+    {
+      "id":113,
+      "img":"https://cdn-icons-png.flaticon.com/128/998/998412.png",
+      "type":"Professional Membership",
+      "time_period":"1 Year",
+      "price":40000
+    },
+    {
+      "id":114,
+      "img":"https://cdn-icons-png.flaticon.com/128/2103/2103862.png",
+      "type":"Corporate Membership",
+      "time_period":"3 Years",
+      "price":80000
+    },
+    {
+      "id":115,
+      "img":"https://cdn-icons-png.flaticon.com/128/11192/11192853.png",
+      "type":"Lifetime Membership",
+      "time_period":"Lifetime",
+      "price":150000
+    },
+    {
+      "id":116,
+      "img":"https://cdn-icons-png.flaticon.com/128/8555/8555318.png",
+      "type":"Institutional Membership",
+      "time_period":"5 years",
+      "price":250000
+    },
+    {
+      "id":117,
+      "img":"https://cdn-icons-png.flaticon.com/128/8235/8235288.png",
+      "type":"Honorary Membership",
+      "time_period":"Special Status",
+      "price":1000
+    },
+    {
+      "id":118,
+      "img":"https://cdn-icons-png.flaticon.com/128/8815/8815065.png",
+      "type":"Executive Membership",
+      "time_period":"3 Years",
+      "price":35000
+    },
+    {
+      "id":119,
+      "img":"https://cdn-icons-png.flaticon.com/128/921/921490.png",
+      "type":"Global Membership",
+      "time_period":"5 Years",
+      "price":350000
+    }
+  ],
+
+  "Testimonials":[
+    {
+      "id":120,
+      "title":"Dr. Aditi Sharma ",
+      "img":"https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "post":"Research scientist",
+      "body":"Being a part of ISAMC has been a game-changer! The access to cutting-edge research and networking opportunities has helped me advance my career in additive manufacturing."
+    },
+    {
+      "id":121,
+      "title":"Prof. Rajeev Patel ",
+      "img":"https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "post":"University professor",
+      "body":"ISAMC connects academia with industry, offering real-world applications for our research. The collaborative environment has been instrumental in pushing the boundaries of material science."
+    },
+    {
+      "id":122,
+      "title":"Sneha Kapoor",
+      "img":"https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "post":"Student member",
+      "body":"As a student, ISAMC has provided me with invaluable mentorship and learning resources. It’s more than a membership—it’s a gateway to innovation!"
+    },
+    {
+      "id":123,
+      "title":"Arjun Mehta",
+      "img":"https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "post":"Industry professional",
+      "body":"Joining ISAMC was one of my best decisions! The conferences and expert discussions give deep insights into the latest advancements in additive manufacturing."
+    },
+    {
+      "id":124,
+      "title":"Global Tech Ltd.",
+      "img":"https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
+      "post":"Corporate member",
+      "body":"ISAMC’s corporate membership has opened doors to high-impact partnerships and industry insights that drive innovation in our company’s manufacturing processes."
+    }
+  ],
+
+  "upevents":[
+    {
+      "id":130,
+      "img":"https://www.gruppotim.it/content/dam/gt/innovazione/ai-challenge/AI_CHALLENGE_light_1920x975.jpg",
+      "date":"June 15, 2025",
+      "title":"ISAMC Hackathon - AI Challenge",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML.A 24-hour coding marathon where teams develop groundbreaking AI solutions for real-world problems. Exciting prizes await the winners!"
+    },
+    {
+      "id":131,
+      "img":"https://ece.emory.edu/_includes/images/AI-Ethics1.jpg",
+      "date":"June 15, 2025",
+      "title":"Ethical AI & Responsible Innovation Forum",
+      "body":"Budding entrepreneurs showcase their AI-driven business ideas to investors and experts. A great networking opportunity for startups!"
+    },
+    {
+      "id":132,
+      "img":"https://www.theprevalentindia.com/wp-content/uploads/2022/07/digital-startup-pitch-night-worlds-first-ever-phygital-start-up-funding-event-by-engage-ai-digital-grabs-3-million-eyeballs-globally.jpg",
+      "date":"June 15, 2025",
+      "title":"AI Startup Pitch Night",
+      "body":"Explore AI’s role in revolutionizing healthcare, from diagnostics to patient care, featuring doctors, engineers, and AI specialists."
+    },
+    {
+      "id":133,
+      "img":"https://www.brainvire.com/blog/wp-content/uploads/2024/02/ai-in-diagnosis.jpg",
+      "date":"June 15, 2025",
+      "title":"AI in Healthcare - Transforming Medical Tech",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    },
+    {
+      "id":134,
+      "img":"https://aes2.org/wp-content/uploads/2024/03/AES-MachineLearning_TealJade.png",
+      "date":"June 15, 2025",
+      "title":"AI & Machine Learning Summit 2025",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    }
+  ],
+
+  "eventsArchives":[
+     {
+      "id":140,
+      "date":{
+        "day":20, "month":"June"
+      },
+      "title":"AI & Machine Learning Summit 2025",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    },
+     {
+      "id":141,
+      "date":{
+        "day":13, "month":"September"
+      },
+      "title":"AI & Machine Learning Summit 2025",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    },
+     {
+      "id":142,
+      "date":{
+        "day":22, "month":"April"
+      },
+      "title":"AI & Machine Learning Summit 2025",
+      "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    }
+  ],
+
+  "features":[
+    {
+      "id": 135,
+      "img": "https://cdn-icons-png.flaticon.com/128/5278/5278402.png",
+      "title": "Cutting-Edge AI Research",
+      "body": "Stay ahead with access to groundbreaking AI research, papers, and innovations from global experts."
+    },
+    {
+      "id": 136,
+      "img": "https://cdn-icons-png.flaticon.com/128/3710/3710936.png",
+      "title": "Industry Networking",
+      "body": "Connect with AI professionals, researchers, and businesses through forums, webinars, and events."
+    },
+    {
+      "id": 137,
+      "img": "https://cdn-icons-png.flaticon.com/128/6543/6543839.png",
+      "title": "Hands-on Learning & Workshops",
+      "body": "ISAMC is committed to cutting-edge research, education, and innovation that drive real-world solutions. We empower visionary minds to explore, create, and redefine possibilities"
+    },
+    {
+      "id": 138,
+      "img": "https://cdn-icons-png.flaticon.com/128/18473/18473401.png",
+      "title": "Startup & Funding Opportunities",
+      "body": "Get exclusive access to investors, mentorship programs, and funding opportunities for AI-driven startups."
+    },
+    {
+      "id": 139,
+      "img": "https://cdn-icons-png.flaticon.com/128/1833/1833835.png",
+      "title": "AI Ethics & Policy Guidelines",
+      "body": "Understand responsible AI development with ethical frameworks and policy discussions."
+    },
+    {
+      "id": 140,
+      "img": "https://cdn-icons-png.flaticon.com/128/1087/1087840.png",
+      "title": "Innovative AI Tools & Resources",
+      "body": "Utilize cutting-edge AI tools, datasets, and resources for research and development."
+    }
+  ],
+
+  "resourceCards":[
+    {
+      "img":"https://th.bing.com/th/id/OIP.KSpWOEys1sDC0LrxuseJlwHaHa?rs=1&pid=ImgDetMain",
+      "title":"Introduction to Additive Manufacturing",
+      "body":"Explore the fundamentals of additive manufacturing (AM), including its evolution, technologies, and applications across industries."
+    },
+    {
+      "img":"https://www.researchgate.net/profile/Xiaoyong-Tian/publication/358640644/figure/fig4/AS:1133465231736834@1647250578420/Material-system-used-in-AM-processes_Q320.jpg",
+      "title":"Materials & Processes in AM",
+      "body":"Learn about the different materials used in AM, such as polymers, metals, ceramics, and composites, along with key manufacturing processes."
+    },
+    {
+      "img":"https://blogs.autodesk.com/advanced-manufacturing/wp-content/uploads/sites/140/2018/06/Inspectio-Additive.png",
+      "title":"Industrial Applications of AM",
+      "body":"Discover how AM is transforming sectors like aerospace, healthcare, automotive, and consumer goods through innovative designs and rapid prototyping."
+    },
+    {
+      "img":"https://images.credly.com/images/aefbc7b3-52ea-459c-b450-aa1538a09000/image.png",
+      "title":"AM Standards & Certifications",
+      "body":"Stay informed on global standards, regulations, and certifications that ensure quality, safety, and reliability in additive manufacturing"
+    },
+    {
+      "img":"https://gesrepair.com/wp-content/uploads/Sustainable-Additive-Manufacturing-jpg-1024x596.jpg",
+      "title":"Sustainability & Future Trends",
+      "body":"Understand the environmental impact of AM and explore emerging trends such as bio-printing, AI-driven design, and sustainable materials."
+    },
+    {
+      "img":"https://c8.alamy.com/comp/2M59RE9/research-and-development-concept-icon-2M59RE9.jpg",
+      "title":"Research & Development in AM",
+      "body":"Keep up with the latest breakthroughs and research initiatives driving innovation in the field of additive manufacturing."
+    }
+  ],
+
+  "caseStudy":[
+    {
+      "img":"https://3dprint.com/wp-content/uploads/2014/08/ge9x-1-1024x575.jpg",
+      "title":"Aerospace: 3D-Printed Turbine Blades",
+      "body":"Discover how leading aerospace companies use AM to produce lightweight, high-performance turbine blades, reducing costs and improving fuel efficiency"
+    },
+    {
+      "img":"https://th.bing.com/th/id/OIP.GnRtPJeFl1U-Sr2gjHef0AHaE8?rs=1&pid=ImgDetMain",
+      "title":"Healthcare: 3D-Printed Prosthetics & Implants",
+      "body":"Learn how additive manufacturing is revolutionizing personalized healthcare by enabling custom prosthetics and bio-compatible implants for patients."
+    },
+    {
+      "img":"https://autocomponentsindia.com/wp-content/uploads/2017/06/Hyundai-hybrid-lightweight-body-structure.jpg",
+      "title":"Automotive: Lightweight & Complex Components",
+      "body":"See how AM is helping car manufacturers create durable, lightweight parts, leading to improved vehicle performance and energy efficiency."
+    },
+    {
+      "img":"https://worldarchitecture.org/cdnimgfiles/extuploadc/tecla3dprintedhousewaspimg1-1-.jpg",
+      "title":"Construction: 3D-Printed Buildings & Structures",
+      "body":"Explore groundbreaking projects where AM is used to 3D-print houses and bridges, reducing material waste and speeding up construction timelines."
+    },
+    {
+      "img":"https://th.bing.com/th/id/R.cd8885c2353ee0279276c9a2f983d91c?rik=%2fs5x9KzT19V9eg&riu=http%3a%2f%2fpctechmag.com%2fwp-content%2fuploads%2f2015%2f11%2fwearable-tech.jpg&ehk=m4dM3%2bWfMzlAm7pA9%2fW%2fMYScZ0ROXDGizDRhPIHiUGM%3d&risl=&pid=ImgRaw&r=0",
+      "title":"Fashion & Wearables: Customized Design Innovations",
+      "body":"Discover how designers are using 3D printing to craft unique, sustainable, and customizable clothing, accessories, and footwear."
+    }
+  ],
+
+  "faqs":[
+    {
+      "title":"What is Additive Manufacturing (AM)?",
+      "body":"Overview of AM technology, process explanations, key benefits, and industry applications."
+    },
+    {
+      "title":"How is Additive Manufacturing Different from Traditional Manufacturing?",
+      "body":"Comparison between AM and conventional manufacturing methods, including materials, production time, and cost-effectiveness"
+    },
+    {
+      "title":"What Are the Key Materials Used in Additive Manufacturing?",
+      "body":"Detailed insights into materials like polymers, metals, ceramics, and composites used in various AM applications."
+    },
+    {
+      "title":"What Are the Latest Advancements in Additive Manufacturing?",
+      "body":"Information on emerging technologies, AI-driven design improvements, bio-printing, and sustainability innovations in AM."
+    },
+    {
+      "title":"How Can I Get Started with Additive Manufacturing?",
+      "body":"Guidelines on learning resources, training programs, software recommendations, and entry-level applications for beginners."
+    }
+  ],
+
+  "papers":[
+     {
+    "title": "AI in Healthcare",
+    "date": "March 12, 2024",
+    "summary": "Exploring AI applications in medical diagnostics, patient care, and efficiency improvements in healthcare systems."
+  },
+  {
+    "title": "Ethical AI & Fairness",
+    "date": "July 8, 2023",
+    "summary": "An in-depth analysis of AI bias, fairness in algorithms, and responsible technology deployment strategies."
+  },
+  {
+    "title": "Neural Networks Advancements",
+    "date": "September 20, 2022",
+    "summary": "Recent breakthroughs in deep learning architectures, improving performance and accuracy in AI-driven applications."
+  },
+  {
+    "title": "AI for Business Growth",
+    "date": "May 10, 2025",
+    "summary": "How businesses leverage AI for predictive analytics, automation, and competitive market strategies."
+  }
+],
+
+  "generals":[
+    {
+      "id":141,
+      "img":"https://cdn.analyticsvidhya.com/wp-content/uploads/2024/02/Ai-Machine-Learning-trends-scaled.jpg",
+      "date":"April 10, 2025",
+      "title":"AI & Machine Learning Trends 2025",
+      "subtitle":"Advancements in Deep Learning & Neural Networks",
+      "body":"This publication covers the latest breakthroughs in deep learning, AI-powered automation, and neural network optimizations that are transforming industries worldwide."
+    },
+    {
+      "id":142,
+      "img":"https://th.bing.com/th/id/OIP.aduraW5Ss8DVIAwOMwgR7AHaEK?rs=1&pid=ImgDetMain",
+      "date":"May 22, 2025",
+      "title":"Ethical AI & Responsible Innovation",
+      "subtitle":"The Future of AI Governance & Fairness",
+      "body":" An in-depth analysis of AI ethics, bias prevention, and global policy frameworks shaping responsible AI deployment in tech, healthcare, and finance."
+    },
+    {
+      "id":143,
+      "img":"https://cdn.zerosuniverse.com/wp-content/uploads/2023/04/AI-Startup.jpg",
+      "date":"June 5, 2025",
+      "title":"AI in Business & Startups",
+      "subtitle":"Leveraging AI for Market Growth & Entrepreneurship",
+      "body":"A comprehensive guide for businesses and startups on integrating AI to enhance productivity, decision-making, and market expansion."
+    }
+  ],
+
+  "Events": [
+    {
+      "id": 4,
+      "img": "https://www.metal-am.com/wp-content/uploads/sites/4/2024/08/Military-Additive-Manufacturing-Summit.png",
+      "title": "Additive Manufacturing Summit 2025",
+      "date": "June 15, 2025",
+      "location": "New Delhi, India",
+      "body": "A premier gathering of industry leaders, researchers, and innovators discussing advancements in 3D printing and material characterization."
+    },
+    {
+      "id": 5,
+      "img": "https://th.bing.com/th/id/OIP.jBptTA7Hc9UdSZqv53TkLgHaEK?rs=1&pid=ImgDetMain",
+      "title": "Advanced Materials Workshop",
+      "date": "July 10, 2025",
+      "location": "Bangalore, India",
+      "body": "Hands-on training on new materials for additive manufacturing, including metal powders, polymers, and composites."
+    },
+    {
+      "id": 6,
+      "img": "https://it.johnshopkins.edu/wp-content/uploads/DSEC_RM-scaled.jpg",
+      "title": "ISAMC Annual Conference",
+      "date": "August 25, 2025",
+      "location": "Mumbai, India",
+      "body": "A multi-day event featuring keynote speakers, panel discussions, and networking opportunities for professionals in manufacturing and characterization."
+    },
+    {
+      "id": 7,
+      "img": "https://newhorizonsmessage.com/wp-content/uploads/2022/02/images2262-61f8cee2ee16e.jpg",
+      "title": "3D Printing for Healthcare",
+      "date": "September 12, 2025",
+      "location": "Hyderabad, India",
+      "body": "Exploring the role of bioprinting and medical-grade materials in revolutionizing healthcare applications."
+    },
+    {
+      "id": 8,
+      "img": "https://richfieldsplastics.com/wp-content/uploads/2019/07/Sustainable-Manufacturing-Creates-Clean-Production-Processes.jpg",
+      "title": "Sustainable Manufacturing Forum",
+      "date": "October 5, 2025",
+      "location": "Chennai, India",
+      "body": "Focused on eco-friendly additive manufacturing, reducing waste, and optimizing production efficiency"
+    }
+  ],
+
+  "Member": [
+    {
+      "id": 9,
+      "img": "https://cdn4.iconfinder.com/data/icons/seo-104/100/icon-23-512.png",
+      "title": "Networking Opportunities",
+      "body": "Connect with industry leaders, researchers, and professionals through conferences, workshops, and online forums."
+    },
+    {
+      "id": 10,
+      "img": "https://webstockreview.net/images/dictionary-clipart-book-index-11.png",
+      "title": "Access to Resources",
+      "body": "Gain exclusive access to research papers, technical reports, webinars, and our quarterly journal on additive manufacturing."
+    },
+    {
+      "id": 11,
+      "img": "https://icon-library.com/images/discount-icon-png/discount-icon-png-1.jpg",
+      "title": "Event Discounts",
+      "body": "Enjoy reduced registration fees for conferences, workshops, and training programs organized by ISAMC and partner organizations."
+    }
+  ],
+
+  "Publications": [
+    {
+      "id": 12,
+      "img": "https://www.latestprintingnews.com/wp-content/uploads/2023/02/Advancements-in-3D-printing-applications-1024x538.jpg",
+      "subtitle": "Exploring Next-Gen Materials for Additive Manufacturing",
+      "title": "Advancements in 3D Printing Materials",
+      "date": "March 2025",
+      "body": "This publication dives into the latest innovations in metal, polymer, and composite materials used in 3D printing. It highlights breakthroughs in material strength, sustainability, and cost-effectiveness for industrial applications"
+    },
+    {
+      "id": 13,
+      "img": "https://th.bing.com/th/id/OIP.gSqxU1zgqHvoaABTWCKivwHaEK?rs=1&pid=ImgDetMain",
+      "subtitle": "How AI is Revolutionizing 3D Printing Processes",
+      "title": "AI & Automation in Additive Manufacturing",
+      "date": "June 2025",
+      "body": "A comprehensive study on machine learning algorithms, automated printing techniques, and AI-driven quality control in additive manufacturing. This paper discusses efficiency improvements and predictive analytics for smarter production."
+    },
+    {
+      "id": 14,
+      "img": "https://russelsmithgroup.com/wp-content/uploads/2023/10/Discover-How-Additive-Manufacturing-Promotes-Sustainability.png",
+      "subtitle": "Eco-Friendly Approaches to 3D Printing",
+      "title": "Sustainability in Additive Manufacturing",
+      "date": "September 2025",
+      "body": "Focuses on biodegradable materials, energy-efficient printing methods, and waste reduction strategies in additive manufacturing. This publication provides insights into green manufacturing practices for a sustainable future"
+    }
+  ],
+
+  "partners": [
+    {
+      "id": 15,
+      "img": "https://psd2.partnersbanka.cz/partners.png",
+      "title": "Partner's name"
+    },
+    {
+      "id": 16,
+      "img": "https://psd2.partnersbanka.cz/partners.png",
+      "title": "Partner's name"
+    },
+    {
+      "id": 17,
+      "img": "https://psd2.partnersbanka.cz/partners.png",
+      "title": "Partner's name"
+    },
+    {
+      "id": 18,
+      "img": "https://psd2.partnersbanka.cz/partners.png",
+      "title": "Partner's name"
+    },
+    {
+      "id": 19,
+      "img": "https://psd2.partnersbanka.cz/partners.png",
+      "title": "Partner's name"
+    }
+  ],
+
+  "News": [
+    {
+      "id": 20,
+      "img": "https://etstatic.tnn.in/photo/msid-109456487,updatedat-1713606025913,width-200,height-200,resizemode-75/109456487.jpg",
+      "title": "HDFC AMC Announces Rs 90 Dividend Record Date",
+      "date": "May 23, 2025",
+      "body": "HDFC Asset Management Company has announced a final dividend of Rs 90 per equity share, with the record date set for June 6, 2025. The company reported an 18% growth in net profit for the March 2025 quarter."
+    },
+    {
+      "id": 21,
+      "img": "https://images.moneycontrol.com/static-mcnews/2023/03/edelweiss.jpg?impolicy=website&width=770&height=431",
+      "title": "Edelweiss AMC Receives SEBI Nod for SIF",
+      "date": "May 22, 2025",
+      "body": "Edelweiss Asset Management has received SEBI approval for its entry into Specialized Investment Funds (SIFs). The company launched Altiva SIF, a new platform dedicated to bridging the gap between Mutual Funds and Portfolio Management Services (PMS)"
+    },
+    {
+      "id": 22,
+      "img": "https://i.ytimg.com/vi/MP4lz--b-18/maxresdefault.jpg",
+      "title": "Bajaj Finserv AMC Expands Investment Strategy",
+      "date": "May 21, 2025",
+      "body": "Bajaj Finserv AMC is increasing exposure to mid and small caps after recent market corrections. The firm is bullish on consumption, BFSI, and healthcare sectors, with a focus on real estate and alcoholic beverages"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@import "react-slideshow-image/dist/styles.css";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.slick-slide > div{
+    margin: 0 10px;
+}
+
+
+.custom-dots li button::before {
+  content: "⬤";
+  font-size: 20px !important;
+  color: gray !important;
+}
+.custom-dots li.slick-active button:before {
+  color: #007BFF !important;
+}
+
+.slick-arrow:before{
+    color: rgb(37, 37, 255) !important;
+    font-size: 1.5rem !important;
+}
+
+.border_center{
+  @apply border-2 border-blue-500 m-auto w-2/11
+}
+
+.border_start{
+  @apply border-2 border-blue-500 w-2/4 m-auto md:m-0 md:w-2/13
+}
+
+
+.links_border{
+    @apply relative hover:text-blue-500 after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full
+}
+
+/* .card_scale{
+    @apply hover:scale-101 transition-all duration-300 hover:shadow-xl
+}
+    */
+
+.text_responsive
+
+.transi{
+    @apply transition-all duration-200
+} 
+
+.text-blue{
+    @apply text-blue-600
+}
+
+.blue_btn{
+    @apply text-blue-500 hover:text-blue-600 cursor-pointer
+}
+
+.bg_blue{
+    @apply bg-blue-500
+}
+
+/* News Section Styles */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* News card hover effects */
+.news-card {
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+}
+
+/* News badge styles */
+.news-badge {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.3);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Remove the zoom effect CSS */
+
+        
