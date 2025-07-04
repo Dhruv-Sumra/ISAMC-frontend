@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/useAuthStore';
 import Spinner from '../components/ui/Spinner';
 import { toast } from 'react-hot-toast';
 
-const ADMIN_EMAIL = "dhruvsumra13@gmail.com"
+// Admin access is now role-based instead of email-based
 
 const Admin = () => {
   const { user, isAuthenticated } = useAuthStore();
@@ -553,7 +553,7 @@ const Admin = () => {
 
   // Function to check if current user is admin
   const isAdmin = () => {
-    return user?.email === ADMIN_EMAIL;
+    return user?.role === 'admin';
   };
 
   if (loading) {

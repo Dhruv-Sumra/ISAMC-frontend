@@ -20,9 +20,6 @@ const navLinks = [
   { path: "/contact", label: "Contact us" },
 ];
 
-// Admin email - replace with your actual email
-const ADMIN_EMAIL = "your-email@example.com"; // Replace this with your actual email
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -34,7 +31,7 @@ const Header = () => {
 
   // Function to check if current user is admin
   const isAdmin = () => {
-    return user?.email === ADMIN_EMAIL;
+    return user?.role === 'admin';
   };
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -173,13 +170,15 @@ const Header = () => {
           >
             <Settings size={16} /> Edit Profile
           </Link>
-          <Link
-            to="/admin"
-            className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-blue-500 px-2 py-2 transition-colors"
-            onClick={() => setIsOpen(false)}
-          >
-            <Shield size={16} /> Admin Panel
-          </Link>
+          {isAdmin() && (
+            <Link
+              to="/admin"
+              className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-blue-500 px-2 py-2 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              <Shield size={16} /> Admin Panel
+            </Link>
+          )}
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 text-red-500 hover:text-red-600 px-2 py-2 transition-colors w-full text-left"
@@ -233,14 +232,16 @@ const Header = () => {
               <Settings className="w-4 h-4 mr-2" />
               Edit Profile
             </Link>
-            <Link
-              to="/admin"
-              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-100"
-              onClick={() => setIsProfileMenuOpen(false)}
-            >
-              <Shield className="w-4 h-4 mr-2" />
-              Admin Panel
-            </Link>
+            {isAdmin() && (
+              <Link
+                to="/admin"
+                className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-100"
+                onClick={() => setIsProfileMenuOpen(false)}
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                Admin Panel
+              </Link>
+            )}
             <button
               onClick={handleLogout}
               className="flex items-center cursor-pointer w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-blue-100"
