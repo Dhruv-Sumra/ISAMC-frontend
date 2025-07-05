@@ -1,12 +1,18 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../ui/Spinner";
 import api from "../../utils/api";  
 
 const Member = () => {
+  const navigate = useNavigate();
   const [member, setMember] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const handleBecomeMember = () => {
+    navigate("/membership");
+  };
 
   // useCallback to memoize fetchEventsData
   const fetchEventsData = useCallback(async () => {
@@ -105,14 +111,14 @@ const Member = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
       >
-        <a href="/membership#payment">
+        <Link to="/membership" onClick={handleBecomeMember}>
           <motion.button
             className="text-white bg-blue-500 hover:bg-blue-600 py-2 cursor-pointer px-3 md:px-5 rounded-lg tracking-wide md:text-2xl"
             whileHover={{ scale: 1.05 }}
           >
             Become a Member
           </motion.button>
-        </a>
+        </Link>
       </motion.div>
     </motion.div>
   );
