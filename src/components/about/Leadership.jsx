@@ -93,6 +93,11 @@ const Leadership = () => {
                 <p className="text-blue-600 dark:text-blue-400 font-semibold mb-3 text-sm">
                   {item.post}
                 </p>
+                {item.place && (
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">
+                    Place: {item.place}
+                  </p>
+                )}
                 <div className="w-16 h-0.5 bg-blue-600 mx-auto mb-4"></div>
                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-6">
                   {item.expertise}

@@ -267,7 +267,7 @@ const Admin = () => {
       case 'partners':
         return ['title', 'imageUrl'];
       case 'leadership':
-        return ['fullName', 'post', 'expertise', 'imageUrl', 'email', 'linkedinUrl', 'websiteUrl'];
+        return ['fullName', 'post', 'place', 'expertise', 'imageUrl', 'email', 'linkedinUrl', 'websiteUrl'];
       case 'tier':
         return ['title', 'timeline', 'fees'];
       case 'Testimonials':

@@ -47,56 +47,64 @@
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Dr. Ravi Kumar",
       "post": "President",
-      "expertise": "Additive Manufacturing, Material Science"
+      "expertise": "Additive Manufacturing, Material Science",
+      "place": "IITGN"
     },
     {
       "id": 105,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Prof. Megha Sharma",
       "post": "Vice President",
-      "expertise": "Additive Manufacturing, Material Science"
+      "expertise": "Additive Manufacturing, Material Science",
+      "place": "IITB"
     },
     {
       "id": 106,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Mr. Arjun Verma",
       "post": "Secretary",
-      "expertise": "Industry Regulations, 3D Printing Technologies"
+      "expertise": "Industry Regulations, 3D Printing Technologies",
+      "place": "IITD"
     },
     {
       "id": 107,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Dr. Pooja Mishra",
       "post": "Treasurer",
-      "expertise": "Metal Additive Manufacturing, Smart Materials"
+      "expertise": "Metal Additive Manufacturing, Smart Materials",
+      "place": "IITK"
     },
     {
       "id": 108,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Prof. Manish Joshi",
       "post": "Technical Head",
-      "expertise": "CAD & Simulation, Computational Mechanics"
+      "expertise": "CAD & Simulation, Computational Mechanics",
+      "place": "IITM"
     },
     {
       "id": 109,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Ms. Sneha Kapoor",
       "post": "Research Coordinator",
-      "expertise": "Nano-materials, Surface Engineering"
+      "expertise": "Nano-materials, Surface Engineering",
+      "place": "IITKGP"
     },
     {
       "id": 110,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Dr. Neeraj Patel",
       "post": "Innovation Head",
-      "expertise": "AI in Manufacturing, Process Optimization"
+      "expertise": "AI in Manufacturing, Process Optimization",
+      "place": "IITR"
     },
     {
       "id": 111,
       "img": "https://static.vecteezy.com/system/resources/previews/001/206/101/non_2x/man-png.png",
       "fullName": "Mr. Rajesh Desai",
       "post": "Industry Liaison Officer",
-      "expertise": "Business Strategy, Industrial Applications"
+      "expertise": "Business Strategy, Industrial Applications",
+      "place": "IITBHU"
     }
   ],
 
