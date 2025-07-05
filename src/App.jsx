@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/home/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import useScrollToTop from "./hooks/useScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Membership from "./pages/Membership";
@@ -29,6 +30,9 @@ import './styles/toast.css';
 
 function App() {
   const { isLiquidGlassActive, liquidGlassWidth, liquidGlassHeight } = useLiquidGlassStore();
+  
+  // Auto scroll to top on route change
+  useScrollToTop();
 
   return (
     <Router>
