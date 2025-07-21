@@ -1,19 +1,26 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import api from '../utils/api';
 
 const GalleryContext = createContext();
 
 export const useGallery = () => useContext(GalleryContext);
 
 export const GalleryProvider = ({ children }) => {
-  const [galleries, setGalleries] = useState(() => {
-    // Load from localStorage if available
-    const stored = localStorage.getItem('galleries');
-    return stored ? JSON.parse(stored) : [];
-  });
+  const [galleries, setGalleries] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem('galleries', JSON.stringify(galleries));
-  }, [galleries]);
+    const fetchGalleries = async () => {
+      try {
+        const response = await api.get('/gallery');
+        if (response.data.success) {
+          setGalleries(response.data.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch galleries:', error);
+      }
+    };
+    fetchGalleries();
+  }, []);
 
   return (
     <GalleryContext.Provider value={{ galleries, setGalleries }}>

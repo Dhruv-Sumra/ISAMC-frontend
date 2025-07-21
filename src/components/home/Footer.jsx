@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "/public/logo2.png";
+import logo2 from '../../assets/logo2.png'; // Adjust the path as needed
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="space-y-3">
           <div className="flex flex-start space-x-2 items-center">
             <a href="/">
-              <img className="h-10" src={logo} alt="logo" />
+              <img className="h-10" src={logo2} alt="logo" />
             </a>
             <h2 className="text-2xl font-bold">ISAMC
               <div className="border-2 border-blue-500 w-2/3"></div>
@@ -83,21 +83,25 @@ const Footer = () => {
             </h2>
           </div>
 
-          <div className="pr-3 font-medium space-y-2 ">
-            <p>
-              <i className="text-blue-500 fa-solid fa-location-dot "></i>
-              &nbsp; Flat No. 204, Floor No. 2, Herbelia, Manpada, Herbelia CHSL, ACME, Ozone, G. A. Road, Thane (W), Thane-400610. 
-            </p>
+          <div className="pr-3 font-medium space-y-3">
+            <div className="flex items-start">
+              <i className="text-blue-500 fa-solid fa-location-dot mt-1"></i>
+              <p className="ml-3">
+                Flat No. 204, Floor No. 2, Herbelia, Manpada, Herbelia CHSL, ACME, Ozone, G. A. Road, Thane (W), Thane-400610. 
+              </p>
+            </div>
 
-            <p>
-              <i className="text-blue-500 fa-solid fa-phone"></i>
-              &nbsp; contact@isamc.org
-            </p>
-
-            <p>
+            <div className="flex items-center">
               <i className="text-blue-500 fa-solid fa-envelope"></i>
-              &nbsp; +91 11 2659 7135
-            </p>
+              <a href="mailto:info@isamc.com" className="ml-3 hover:text-blue-600">
+                info@isamc.com
+              </a>
+            </div>
+{/* 
+            <div className="flex items-center">
+              <i className="text-blue-500 fa-solid fa-phone"></i>
+              <p className="ml-3">+91 11 2659 7135</p>
+            </div> */}
           </div>
         </div>
 

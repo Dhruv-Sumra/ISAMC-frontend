@@ -79,7 +79,7 @@ const EnhancedMembershipPurchase = ({ isOpen, onClose, selectedTier }) => {
     if (Object.keys(errors).length > 0) return;
     setIsSubmitting(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://isamc-backend-195u.onrender.com';
       const response = await fetch(`${apiUrl}/api/contact/send-membership-application`, {
         method: 'POST',
         headers: { 

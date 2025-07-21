@@ -30,34 +30,39 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 mt-20">
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12 dark:from-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4">
+      {/* Thematic Header */}
+      <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-16 dark:from-gray-800 dark:to-black">
+        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
           >
-            <h1 className="text-5xl font-extrabold tracking-tight mb-2 drop-shadow-lg">
-              Gallery
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-3 drop-shadow-md">
+              Our Gallery
             </h1>
-            <div className="mx-auto w-24 h-1 bg-white/60 dark:bg-white/30 rounded-full mb-2"></div>
-            <p className="text-lg text-white/80 dark:text-white/60 font-medium mb-2">A collection of memories and moments</p>
+            <div className="mx-auto w-28 h-1 bg-white/50 dark:bg-white/30 rounded-full mb-4"></div>
+            <p className="text-lg text-white/90 dark:text-white/70 font-medium">
+              A collection of memories from our events and initiatives.
+            </p>
           </motion.div>
         </div>
       </div>
-      <div className="container mx-auto px-4 py-8 space-y-12">
+
+      <div className="container mx-auto px-4 py-10 space-y-12">
         {galleries.map((gallery, gIdx) => (
           <div key={gIdx}>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 text-left pl-2">{gallery.title}</h2>
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-left pl-2 border-l-4 border-blue-500">
+              {gallery.title}
+            </h2>
             <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 pb-8">
               {gallery.images.map((url, index) => (
                 <motion.div
                   key={url + index}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.04 }}
-                  className="mb-4 break-inside-avoid group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-200"
+                  transition={{ delay: index * 0.05 }}
+                  className="mb-4 break-inside-avoid group cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all duration-300"
                   onClick={() => { setSelectedImage({ url }); setShowModal(true); }}
                 >
                   <img
@@ -73,11 +78,16 @@ const Gallery = () => {
             </div>
           </div>
         ))}
-        {galleries.length === 0 && (
-          <div className="text-center py-16">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-12 max-w-md mx-auto">
-              <i className="fas fa-search text-4xl text-gray-300 mb-4"></i>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No images found</h3>
+        {galleries.length === 0 && !selectedImage && (
+          <div className="text-center py-20">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 max-w-lg mx-auto">
+              <i className="fas fa-camera-retro text-5xl text-gray-300 dark:text-gray-500 mb-6"></i>
+              <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+                Our Gallery is Growing
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                New photos from our events will be available soon. Check back later!
+              </p>
             </div>
           </div>
         )}

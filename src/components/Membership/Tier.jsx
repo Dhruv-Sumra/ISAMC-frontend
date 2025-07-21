@@ -151,6 +151,19 @@ const Leadership = () => {
                 </div>
               )}
             </div>
+
+            {/* Become a Member Button */}
+            <div className="text-center mt-4">
+              <button 
+                className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent card's onClick from firing
+                  handleTierClick(item);
+                }}
+              >
+                Become a Member
+              </button>
+            </div>
           </div>
         ))}
       </div>

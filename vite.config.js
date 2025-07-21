@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    outDir: 'dist',
+    outDir: 'public',      // Good for cPanel: outputs to 'public' folder
     assetsDir: 'assets',
     sourcemap: false,
     rollupOptions: {
@@ -25,6 +25,5 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true
-  },
-  base: '/', // <-- set to your subfolder if needed
+  }
 })

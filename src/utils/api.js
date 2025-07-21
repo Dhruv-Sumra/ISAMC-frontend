@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useAuthStore } from "../store/useAuthStore";
 
 // Use Vite env variable, fallback to localhost for dev
-const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const apiUrl = import.meta.env.VITE_API_URL || 'https://isamc-backend-195u.onrender.com';
 
 const api = axios.create({
   baseURL: `${apiUrl}/api`,

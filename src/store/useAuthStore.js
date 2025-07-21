@@ -29,7 +29,7 @@ export const useAuthStore = create(
       checkServerRestart: async () => {
         try {
           // Use fetch instead of api to avoid interceptors
-          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+          const apiUrl = import.meta.env.VITE_API_URL || 'https://isamc-backend-195u.onrender.com';
           const response = await fetch(`${apiUrl}/api/auth/server-time`, {
             method: 'GET',
             credentials: 'include'

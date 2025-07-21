@@ -20,7 +20,7 @@ const VerifyEmail = () => {
     setSuccess('');
     try {
       // Call backend verifyEmail with regToken and otp
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4000'}/api/auth/verify-email`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://isamc-backend-195u.onrender.com'}/api/auth/verify-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ regToken, otp })
