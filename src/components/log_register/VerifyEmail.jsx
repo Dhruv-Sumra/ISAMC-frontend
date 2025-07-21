@@ -1,65 +1,70 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/useAuthStore';
+import { toast } from 'react-hot-toast';
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
-  const { verifyEmail } = useAuthStore();
+  // Get regToken and email from navigation state
+  const regToken = location.state?.regToken;
+  const email = location.state?.email;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
-
     try {
-      const response = await verifyEmail(otp);
-
-      if (response.success) {
-        setSuccess('Email verified successfully');
-        setTimeout(() => navigate('/'), 500);
+      // Call backend verifyEmail with regToken and otp
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4000'}/api/auth/verify-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ regToken, otp })
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSuccess('Email verified successfully. You can now log in.');
+        toast.success('Email verified successfully. Please log in.');
+        setTimeout(() => navigate('/login'), 1000);
       } else {
-        setError(response.message || 'Verification failed');
+        setError(data.message || 'Verification failed');
+        toast.error(data.message || 'Verification failed');
       }
     } catch (err) {
       setError(err.message || 'Verification failed');
+      toast.error(err.message || 'Verification failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  px-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">Verify Email</h2>
-        {error && <p className="text-sm text-red-500 mb-2 text-center">{error}</p>}
-        {success && <p className="text-sm text-green-600 mb-2 text-center">{success}</p>}
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">OTP</label>
-            <input
-              type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              required
-              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-2 rounded-md text-white font-semibold ${
-              loading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-            }`}
-          >
-            {loading ? 'Verifying...' : 'Verify Email'}
-          </button>
-        </form>
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h2 className="text-2xl font-bold mb-4">Verify Your Email</h2>
+      <form onSubmit={handleSubmit} className="w-full max-w-sm">
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          value={otp}
+          onChange={e => setOtp(e.target.value)}
+          className="w-full px-4 py-2 border rounded mb-2"
+          required
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+        >
+          {loading ? 'Verifying...' : 'Verify'}
+        </button>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {success && <p className="text-green-600 mt-2">{success}</p>}
+      </form>
+      <p className="mt-4 text-gray-600">OTP sent to: <span className="font-semibold">{email}</span></p>
     </div>
   );
 };

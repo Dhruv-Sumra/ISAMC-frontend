@@ -26,6 +26,10 @@ import Admin from './pages/Admin';
 import VanillaLiquidGlass from './components/ui/VanillaLiquidGlass';
 import useLiquidGlassStore from './store/useLiquidGlassStore';
 import './styles/toast.css';
+import AllPublications from './pages/AllPublications';
+import BlogDetail from './pages/BlogDetail';
+import EventDetail from './pages/EventDetail';
+import Gallery from './pages/Gallery';
 // import GujaratMap from "./components/resources/GujaratMap";
 
 function App() {
@@ -46,8 +50,11 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/membership" element={<Membership />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/publications" element={<Publications />} />
               <Route path="/resources" element={<Resources />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/blogs/:id" element={<BlogDetail />} />
               {/* <Route path="/gujarat-map" element={<GujaratMap />} /> */}
               <Route path="/contact" element={<Contact />} />
               <Route path="/top-side" element={<Topside />} />
@@ -59,6 +66,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/submit-paper" element={<SubmitPaper />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/all-publications" element={<AllPublications />} />
             </Routes>
           </main>
           

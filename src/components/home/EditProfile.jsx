@@ -14,6 +14,12 @@ const EditProfile = () => {
     email: "",
     contact: "",
     bio: "",
+    institute: "",
+    designation: "",
+    gender: "",
+    expertise: "",
+    dateOfBirth: "",
+    linkedinUrl: "",
     currentPassword: "",
     newPassword: "",
   });
@@ -42,6 +48,12 @@ const EditProfile = () => {
         username: user.username || "",
         contact: user.contact || "",
         bio: user.bio || "",
+        institute: user.institute || "",
+        designation: user.designation || "",
+        gender: user.gender || "",
+        expertise: user.expertise || "",
+        dateOfBirth: user.dateOfBirth || "",
+        linkedinUrl: user.linkedinUrl || "",
         // Ensure password fields are always empty
         currentPassword: "",
         newPassword: "",
@@ -71,7 +83,13 @@ const EditProfile = () => {
       const profileUpdate = {
         name: formData.name,
         contact: formData.contact,
-        bio: formData.bio,    
+        bio: formData.bio,
+        institute: formData.institute,
+        designation: formData.designation,
+        gender: formData.gender,
+        expertise: formData.expertise,
+        dateOfBirth: formData.dateOfBirth,
+        linkedinUrl: formData.linkedinUrl,
       };
 
       await updateProfile(profileUpdate);
@@ -185,27 +203,122 @@ const EditProfile = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Contact Number
+                  Contact Number <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
                   name="contact"
                   value={formData.contact}
                   onChange={handleChange}
+                  required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Bio
+                  Bio <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   name="bio"
                   rows={3}
                   value={formData.bio}
                   onChange={handleChange}
+                  required
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Tell us about yourself, your research interests, and background..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Institute <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="institute"
+                  value={formData.institute}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your institute/organization"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Designation (Area of Interest) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="designation"
+                  value={formData.designation}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Professor, Research Scientist, Student"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Gender <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Expertise (Area of Interest) <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="expertise"
+                  value={formData.expertise}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Additive Manufacturing, Material Science"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Date of Birth <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  required
+                  max={new Date().toISOString().split('T')[0]}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  LinkedIn Profile URL
+                </label>
+                <input
+                  type="url"
+                  name="linkedinUrl"
+                  value={formData.linkedinUrl}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="https://linkedin.com/in/your-profile"
                 />
               </div>
 

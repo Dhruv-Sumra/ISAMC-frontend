@@ -79,12 +79,39 @@ export const useAuthStore = create(
           const response = await api.post("/auth/login", { email, password });
           const { user, accessToken, message, serverStartTime } = response.data;
           if (response.data.success) {
+            // Merge with lastProfile from localStorage for missing fields
+            let mergedUser = { ...user };
+            try {
+              const lastProfile = JSON.parse(localStorage.getItem('lastProfile'));
+              if (lastProfile && typeof lastProfile === 'object') {
+                mergedUser = { ...lastProfile, ...mergedUser };
+              }
+            } catch (e) { /* ignore */ }
+
+            // Fetch full profile if fields are missing
+            const requiredFields = ['contact', 'designation', 'institute', 'gender'];
+            const missingFields = requiredFields.filter(f => !mergedUser[f]);
+            if (missingFields.length > 0) {
+              try {
+                const profileResp = await api.get('/user/profile');
+                mergedUser = { ...mergedUser, ...profileResp.data.user };
+              } catch (e) { /* ignore */ }
+            }
+
             set({
               user: {
-                ...user,
-                contact: user.contact || "",
-                bio: user.bio || "",
-                isVerified: user.isVerified || false
+                ...mergedUser,
+                name: mergedUser.name || mergedUser.fullName || mergedUser.username || '',
+                email: mergedUser.email || '',
+                contact: mergedUser.contact || mergedUser.phone || '',
+                bio: mergedUser.bio || '',
+                institute: mergedUser.institute || '',
+                designation: mergedUser.designation || '',
+                gender: mergedUser.gender || '',
+                expertise: mergedUser.expertise || '',
+                dateOfBirth: mergedUser.dateOfBirth || mergedUser.dob || '',
+                linkedinUrl: mergedUser.linkedinUrl || mergedUser.linkedinProfile || '',
+                isVerified: mergedUser.isVerified || false
               },
               accessToken,
               isAuthenticated: true,
@@ -95,6 +122,12 @@ export const useAuthStore = create(
 
             toast.success(message || "Login successful");
             return { success: true };
+          }
+          // Handle unverified account
+          if (message === "Account not verified. Please register again.") {
+            window.location.href = "/register";
+            toast.error("Registration failed. Please register again.");
+            return { success: false };
           }
           return { success: false };
         } catch (error) {
@@ -176,70 +209,33 @@ export const useAuthStore = create(
           throw errorMessage;
         }
       },
-      register: async (formdata) => {
-        const { name, email, password } = formdata;
-
+      register: async (formData) => {
         try {
           set({ loading: true, error: null });
-          const response = await api.post("/auth/register", {
-            name,
-            email,
-            password,
-          });
-          
-          const { user, accessToken, message, serverStartTime } = response.data;
-          if (response.data.success) {
-            set({
-              user: {
-                ...user,
-                contact: user.contact || "",
-                bio: user.bio || "",
-                isVerified: user.isVerified || false
-              },
-              accessToken,
-              isAuthenticated: true,
-              loading: false,
-              error: null,
-              serverStartTime: serverStartTime || Date.now(),
-            });
-            toast.success(message || "Register successful");
-            return { success: true };
+          const response = await api.post("/auth/register", formData);
+          const { success, message, regToken } = response.data;
+          if (success && regToken) {
+            // Store regToken in state for OTP verification
+            set({ loading: false, error: null });
+            return { success: true, regToken, message };
           }
-          return { success: false };
+          set({ loading: false, error: message || "Registration failed" });
+          return { success: false, error: message || "Registration failed" };
         } catch (error) {
-          console.error("Registration error:", error);
-          
-          // Handle specific error cases
-          let errorMessage = "Registration failed";
-          
-          if (error.response?.status === 409) {
-            errorMessage = "User already exists with this email address";
-          } else if (error.response?.status === 400) {
-            errorMessage = error.response?.data?.message || "Please check your input";
-          } else if (error.response?.data?.message) {
-            errorMessage = error.response.data.message;
-          } else if (error.message) {
-            errorMessage = error.message;
-          }
-          
-          set({
-            error: errorMessage,
-            loading: false,
-            isAuthenticated: false,
-            user: null,
-            accessToken: null,
-          });
-          
-          // Show error toast
-          toast.error(errorMessage);
-          
+          const errorMessage = error.response?.data?.message || "Registration failed";
+          set({ loading: false, error: errorMessage });
           return { success: false, error: errorMessage };
         }
       },
       logout: async () => {
         try {
+          // Set a flag to indicate user-initiated logout
+          window.__isManualLogout = true;
           await api.post("/auth/logout");
           set({ user: null, accessToken: null, isAuthenticated: false });
+          if (get().user) {
+            localStorage.setItem('lastProfile', JSON.stringify(get().user));
+          }
         } catch (error) {
           console.error("Logout failed:", error);
           set({
@@ -249,6 +245,9 @@ export const useAuthStore = create(
             user: null,
             accessToken: null,
           });
+        } finally {
+          // Clear the flag after a short delay
+          setTimeout(() => { window.__isManualLogout = false; }, 1000);
         }
       },
       refreshAccessToken: async () => {
@@ -280,6 +279,23 @@ export const useAuthStore = create(
 
           return { success: true };
         } catch (error) {
+          // If 401 Unauthorized, force logout and redirect
+          if (error.response && error.response.status === 401) {
+            set({
+              accessToken: null,
+              user: null,
+              isAuthenticated: false,
+              loading: false,
+              error: null,
+              isRefreshing: false,
+            });
+            // Only show toast/redirect if not a manual logout
+            if (!window.__isManualLogout) {
+              toast.error('Session expired. Please log in again.');
+              window.location.href = '/login';
+            }
+            return { success: false, message: 'Session expired' };
+          }
           set({
             accessToken: null,
             user: null,

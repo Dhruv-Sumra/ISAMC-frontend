@@ -13,30 +13,8 @@ const Info = () => {
         Shaping the future of scientific advancement
       </h2>
       <div className="space-y-5 dark:text-white">
-        <p
-          className={`md:text-lg text-gray-800 dark:text-white text-left ${fadeInUp} animation-delay-1`}
-        >
-          ISAMC is committed to transforming India's manufacturing landscape by promoting the adoption and innovation of Additive Manufacturing and Smart Technologies across sectors.
-        </p>
-        <p
-          className={`md:text-lg text-gray-800 dark:text-white text-left ${fadeInUp} animation-delay-2`}
-        >
-          Through collaborative research, industry engagement, and policy advocacy, ISAMC serves as a catalyst for accelerating 3D printing and advanced manufacturing capabilities in India.
-        </p>
-        <p
-          className={`md:text-lg text-gray-800 text-left dark:text-white ${fadeInUp} animation-delay-3`}
-        >
-          We work closely with educational institutions, research organizations, and industrial partners to build a strong ecosystem for additive manufacturing and digital fabrication.
-        </p>
-        <p
-          className={`md:text-lg text-gray-800 text-left ${fadeInUp}  dark:text-white animation-delay-4`}
-        >
-          Our initiatives include technical workshops, global conferences, strategic collaborations, and knowledge dissemination to empower professionals and advance national goals like 'Make in India'.
-        </p>
-        <p
-          className={`md:text-lg text-gray-800 text-left ${fadeInUp} dark:text-white animation-delay-5`}
-        >
-          ISAMC envisions India as a global hub for next-generation manufacturing by fostering innovation, skill development, and sustainable technology deployment.
+        <p className={`md:text-lg text-gray-800 dark:text-white text-left ${fadeInUp} animation-delay-1`}>
+          ISAMC drives innovation in Additive Manufacturing and Smart Technologies, building a strong ecosystem through research, industry partnerships, and education. Our mission is to empower professionals and make India a global leader in next-generation manufacturing.
         </p>
       </div>
       <style>{`

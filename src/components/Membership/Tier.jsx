@@ -1,11 +1,19 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Spinner from "../ui/Spinner";
-import api from "../../utils/api";  
+import api from "../../utils/api";
+import EnhancedMembershipPurchase from "./EnhancedMembershipPurchase";
+import { useAuthStore } from "../../store/useAuthStore";
+import { toast } from "react-hot-toast";  
 
 const Leadership = () => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
   const [tiers, setTiers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedTier, setSelectedTier] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchEventsData = useCallback(async () => {
     try {
@@ -22,7 +30,14 @@ const Leadership = () => {
     fetchEventsData();
   }, [fetchEventsData]);
 
-  const memoizedTiers = useMemo(() => tiers, [tiers]);
+  const memoizedTiers = useMemo(() => {
+    // Separate honorary membership and other tiers
+    const honoraryTier = tiers.find(tier => tier.type === "Honorary Membership");
+    const otherTiers = tiers.filter(tier => tier.type !== "Honorary Membership");
+    
+    // Return other tiers first, then honorary membership at the end
+    return [...otherTiers, honoraryTier].filter(Boolean);
+  }, [tiers]);
 
   // Function to check if price should show rupee symbol
   const shouldShowRupeeSymbol = (price) => {
@@ -44,6 +59,23 @@ const Leadership = () => {
     return `₹${price}`; // Add rupee symbol for numeric prices
   };
 
+  // Handle tier selection
+  const handleTierClick = (tier) => {
+    if (!isAuthenticated) {
+      toast.error('Please login to purchase membership');
+      navigate('/login');
+      return;
+    }
+    setSelectedTier(tier);
+    setIsModalOpen(true);
+  };
+
+  // Handle modal close
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedTier(null);
+  };
+
   if (loading) {
     return (
       <Spinner/>
@@ -59,7 +91,7 @@ const Leadership = () => {
   }
 
   return (
-    <div className="w-full h-auto mt-20 py-5 md:px-10" id="tier">
+    <div className="w-full h-auto mt-10 py-5 md:px-10" id="tier">
       <div className="text-center mb-8">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-3">
           Membership Tiers
@@ -67,11 +99,12 @@ const Leadership = () => {
         <div className='border-2 border-blue-500 w-20 m-auto'></div>
       </div>
 
-      <div className="px-3 md:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+      <div className="px-3 md:px-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
         {memoizedTiers.map((item, index) => (
           <div 
             key={index} 
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 shadow-md hover:shadow-lg rounded-lg p-5 transition-shadow duration-200"
+            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 shadow-md hover:shadow-lg rounded-lg p-5 transition-shadow duration-200 cursor-pointer transform hover:scale-105 transition-all duration-200"
+            onClick={() => handleTierClick(item)}
           >
             {/* Card Header */}
             <div className="text-center mb-4">
@@ -121,6 +154,13 @@ const Leadership = () => {
           </div>
         ))}
       </div>
+
+      {/* Enhanced Membership Purchase Modal */}
+      <EnhancedMembershipPurchase
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        selectedTier={selectedTier}
+      />
     </div>
   );
 };

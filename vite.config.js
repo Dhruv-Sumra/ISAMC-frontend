@@ -19,11 +19,12 @@ export default defineConfig({
     }
   },
   server: {
-    port: 3000,
+    port: 5173,
     host: true
   },
   preview: {
     port: 4173,
     host: true
-  }
+  },
+  base: '/', // <-- set to your subfolder if needed
 })

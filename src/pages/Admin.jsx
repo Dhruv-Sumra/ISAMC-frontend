@@ -4,6 +4,9 @@ import api from '../utils/api';
 import { useAuthStore } from '../store/useAuthStore';
 import Spinner from '../components/ui/Spinner';
 import { toast } from 'react-hot-toast';
+import ExcelUploadModal from '../components/admin/ExcelUploadModal';
+import GalleryManager from '../components/admin/GalleryManager';
+import blogsDemo from '../data/blogs';
 
 // Admin access is now role-based instead of email-based
 
@@ -15,6 +18,7 @@ const Admin = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showExcelUpload, setShowExcelUpload] = useState(false);
   const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -22,9 +26,11 @@ const Admin = () => {
     { key: 'News', label: 'Latest News', icon: 'fa-solid fa-newspaper', color: 'blue' },
     { key: 'Events', label: 'Featured Events', icon: 'fa-solid fa-calendar', color: 'green' },
     { key: 'upevents', label: 'Upcoming Events', icon: 'fa-solid fa-calendar-plus', color: 'purple' },
+    { key: 'otherEvents', label: 'Other AM Events', icon: 'fa-solid fa-globe', color: 'teal' },
     { key: 'pastEvents', label: 'Past Events', icon: 'fa-solid fa-calendar-check', color: 'gray' },
     { key: 'eventsArchives', label: 'Events Archive', icon: 'fa-solid fa-archive', color: 'gray' },
     { key: 'Publications', label: 'Publications', icon: 'fa-solid fa-book', color: 'indigo' },
+    { key: 'videos', label: 'Video Resources', icon: 'fa-solid fa-video', color: 'red' },
     { key: 'partners', label: 'Partners', icon: 'fa-solid fa-handshake', color: 'yellow' },
     { key: 'leadership', label: 'Leadership', icon: 'fa-solid fa-users', color: 'pink' },
     { key: 'tier', label: 'Member Tiers', icon: 'fa-solid fa-crown', color: 'amber' },
@@ -32,6 +38,8 @@ const Admin = () => {
     { key: 'Mission', label: 'Mission', icon: 'fa-solid fa-bullseye', color: 'red' },
     { key: 'Member', label: 'Member Benefits', icon: 'fa-solid fa-gift', color: 'teal' },
     { key: 'features', label: 'Features', icon: 'fa-solid fa-star', color: 'orange' },
+    { key: 'blogs', label: 'Blogs', icon: 'fa-solid fa-blog', color: 'cyan' },
+    { key: 'gallery', label: 'Gallery', icon: 'fa-solid fa-images', color: 'purple' },
   ];
 
   useEffect(() => {
@@ -96,8 +104,20 @@ const Admin = () => {
     try {
       setLoading(true);
       const response = await api.get('/admin/dashboard');
-      console.log('Dashboard data:', response.data.data);
-      setData(response.data.data || {});
+      const dashboardData = response.data.data || {};
+      // For blogs, merge backend blogs with demo blogs (avoid duplicates by id)
+      if (dashboardData.blogs && Array.isArray(dashboardData.blogs)) {
+        const demoBlogs = Array.isArray(blogsDemo) ? blogsDemo : [];
+        // Merge, preferring backend blogs if id matches
+        const mergedBlogs = [
+          ...dashboardData.blogs,
+          ...demoBlogs.filter(demo => !dashboardData.blogs.some(b => String(b.id) === String(demo.id)))
+        ];
+        dashboardData.blogs = mergedBlogs;
+      } else {
+        dashboardData.blogs = Array.isArray(blogsDemo) ? blogsDemo : [];
+      }
+      setData(dashboardData);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
       toast.error('Failed to load dashboard data');
@@ -144,7 +164,21 @@ const Admin = () => {
   const handleAddItem = async (sectionName) => {
     try {
       setIsSubmitting(true);
-      const response = await api.post(`/admin/add-item/${sectionName}`, formData);
+      let payload = { ...formData };
+      
+      // Ensure videos are always active when added
+      if (sectionName === 'videos') {
+        payload.isActive = true;
+      }
+      
+      // Process gallery images field
+      if (sectionName === 'gallery' && payload.images) {
+        // Split images by newlines and filter out empty lines
+        const imageUrls = payload.images.split('\n').map(url => url.trim()).filter(url => url);
+        payload.images = imageUrls;
+      }
+      
+      const response = await api.post(`/admin/add-item/${sectionName}`, payload);
       if (response.data.success) {
         setShowAddForm(false);
         setFormData({});
@@ -171,8 +205,17 @@ const Admin = () => {
         return;
       }
 
+      let processedFormData = { ...formData };
+      
+      // Process gallery images field
+      if (sectionName === 'gallery' && processedFormData.images) {
+        // Split images by newlines and filter out empty lines
+        const imageUrls = processedFormData.images.split('\n').map(url => url.trim()).filter(url => url);
+        processedFormData.images = imageUrls;
+      }
+
       const updatedData = [...sectionData];
-      updatedData[itemIndex] = { ...updatedData[itemIndex], ...formData };
+      updatedData[itemIndex] = { ...updatedData[itemIndex], ...processedFormData };
 
       const response = await api.put(`/admin/update-section/${sectionName}`, updatedData);
       
@@ -258,12 +301,14 @@ const Admin = () => {
         return ['date', 'title', 'body', 'imageUrl', 'referenceUrl'];
       case 'Events':
       case 'upevents':
-      case 'pastEvents':
+      case 'otherEvents':
         return ['date', 'location', 'title', 'body', 'imageUrl'];
       case 'eventsArchives':
         return ['date.day', 'date.month', 'title', 'body'];
       case 'Publications':
         return ['title', 'subtitle', 'body', 'imageUrl'];
+      case 'videos':
+        return ['title', 'description', 'youtubeUrl', 'author', 'tags', 'isFeatured', 'order'];
       case 'partners':
         return ['title', 'imageUrl'];
       case 'leadership':
@@ -276,6 +321,31 @@ const Admin = () => {
       case 'Member':
       case 'features':
         return ['title', 'body', 'imageUrl'];
+      case 'blogs':
+        return [
+          { name: 'title', label: 'Title', type: 'text', required: true },
+          { name: 'summary', label: 'Summary', type: 'textarea', required: true },
+          { name: 'content', label: 'Content', type: 'textarea', required: true, rows: 6 },
+          { name: 'author', label: 'Author', type: 'text', required: true },
+          { name: 'date', label: 'Date', type: 'date', required: true },
+        ];
+      case 'gallery':
+        return [
+          { name: 'title', label: 'Gallery Title', type: 'text', required: true },
+          { name: 'images', label: 'Image URLs (one per line)', type: 'textarea', required: true, rows: 6 },
+        ];
+      case 'pastEvents':
+        return [
+          'date',
+          'location',
+          'title',
+          { name: 'body', label: 'Body', type: 'textarea', required: true },
+          'imageUrl',
+          { name: 'overview', label: 'Overview', type: 'textarea', required: false },
+          { name: 'highlights', label: 'Highlights', type: 'textarea', required: false },
+          { name: 'theme', label: 'Theme', type: 'textarea', required: false },
+          { name: 'referenceLinks', label: 'Reference Links', type: 'text', required: false },
+        ];
       default:
         return ['title', 'body', 'imageUrl'];
     }
@@ -311,11 +381,18 @@ const Admin = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {fields.map((field) => {
+            // Support both string and object field definitions
+            const fieldName = typeof field === 'string' ? field : field.name;
+            const fieldLabel = typeof field === 'string' ? field.replace(/([A-Z])/g, ' $1').trim() : field.label || field.name;
+            const fieldType = typeof field === 'string' ? 'text' : field.type || 'text';
+            const isRequired = typeof field === 'string' ? true : field.required;
+            const rows = typeof field === 'object' && field.rows ? field.rows : 4;
+
             // Handle nested date fields
-            if (field === 'date.day' || field === 'date.month') {
-              const label = field === 'date.day' ? 'Day' : 'Month';
+            if (fieldName === 'date.day' || fieldName === 'date.month') {
+              const label = fieldName === 'date.day' ? 'Day' : 'Month';
               return (
-                <div key={field}>
+                <div key={fieldName}>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {label}
                     <span className="text-red-500 ml-1">*</span>
@@ -338,36 +415,78 @@ const Admin = () => {
                 </div>
               );
             }
-            if (field === 'body' ? 'md:col-span-2' : '') {
+            // Textarea for 'body' or if type is textarea
+            if (fieldType === 'textarea' || fieldName === 'body') {
               return (
-                <div key={field} className={field === 'body' ? 'md:col-span-2' : ''}>
+                <div key={fieldName} className={fieldName === 'body' ? 'md:col-span-2' : ''}>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
-                    {field.replace(/([A-Z])/g, ' $1').trim()}
-                    <span className="text-red-500 ml-1">*</span>
+                    {fieldLabel}
+                    {isRequired && <span className="text-red-500 ml-1">*</span>}
                   </label>
                   <textarea
-                    value={formData[field] || renderValue(currentData[field]) || ''}
-                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                    value={formData[fieldName] || renderValue(currentData[fieldName]) || ''}
+                    onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
                     className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    rows="4"
-                    placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}...`}
+                    rows={rows}
+                    placeholder={`Enter ${fieldLabel.toLowerCase()}...`}
                   />
+                  {fieldName === 'images' && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      Enter image URLs, one per line. Example: https://example.com/image.jpg
+                    </p>
+                  )}
                 </div>
               );
             }
-            // For title
+            // Special handling for video fields
+            if (sectionName === 'videos') {
+              if (fieldName === 'isFeatured') {
+                return (
+                  <div key={fieldName}>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
+                      {fieldLabel}
+                    </label>
+                    <select
+                      value={formData[fieldName] || renderValue(currentData[fieldName]) || 'false'}
+                      onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value === 'true' })}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    >
+                      <option value="false">No</option>
+                      <option value="true">Yes</option>
+                    </select>
+                  </div>
+                );
+              }
+              if (fieldName === 'order') {
+                return (
+                  <div key={fieldName}>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
+                      {fieldLabel}
+                    </label>
+                    <input
+                      type="number"
+                      value={formData[fieldName] || renderValue(currentData[fieldName]) || '0'}
+                      onChange={(e) => setFormData({ ...formData, [fieldName]: parseInt(e.target.value) || 0 })}
+                      className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      placeholder="Enter order number..."
+                    />
+                  </div>
+                );
+              }
+            }
+            // Default input
             return (
-              <div key={field}>
+              <div key={fieldName}>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 capitalize">
-                  {field.replace(/([A-Z])/g, ' $1').trim()}
-                  <span className="text-red-500 ml-1">*</span>
+                  {fieldLabel}
+                  {isRequired && <span className="text-red-500 ml-1">*</span>}
                 </label>
                 <input
-                  type="text"
-                  value={formData[field] || renderValue(currentData[field]) || ''}
-                  onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                  type={fieldType}
+                  value={formData[fieldName] || renderValue(currentData[fieldName]) || ''}
+                  onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}...`}
+                  placeholder={`Enter ${fieldLabel.toLowerCase()}...`}
                 />
               </div>
             );
@@ -414,6 +533,11 @@ const Admin = () => {
     const section = sections.find(s => s.key === sectionName);
     console.log(`Section ${sectionName} data:`, sectionData);
 
+    // Special handling for gallery section
+    if (sectionName === 'gallery') {
+      return <GalleryManager />;
+    }
+
     return (
       <div className="space-y-6">
         <div className="flex justify-between items-center">
@@ -426,16 +550,36 @@ const Admin = () => {
               {Array.isArray(sectionData) ? `${sectionData.length} items` : 'No items available'}
             </p>
           </div>
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
-          >
-            <i className="fa-solid fa-plus mr-2"></i>
-            Add New
-          </button>
+          <div className="flex space-x-3">
+            <button
+              onClick={() => setShowExcelUpload(true)}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center"
+            >
+              <i className="fa-solid fa-file-excel mr-2"></i>
+              Import Excel
+            </button>
+            <button
+              onClick={() => handleShowAddForm(sectionName)}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+            >
+              <i className="fa-solid fa-plus mr-2"></i>
+              Add New
+            </button>
+          </div>
         </div>
 
         {showAddForm && renderForm(sectionName)}
+
+        {/* Excel Upload Modal */}
+        <ExcelUploadModal
+          isOpen={showExcelUpload}
+          onClose={() => setShowExcelUpload(false)}
+          sectionName={sectionName}
+          onUploadSuccess={() => {
+            fetchDashboardData();
+            setShowExcelUpload(false);
+          }}
+        />
 
         {Array.isArray(sectionData) && sectionData.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -475,6 +619,43 @@ const Admin = () => {
                       )}
                       {item.body && (
                         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{renderValue(item.body)}</p>
+                      )}
+                    </>
+                  ) : sectionName === 'gallery' ? (
+                    <>
+                      {item.title && (
+                        <h3 className="font-semibold text-gray-900 dark:text-white text-lg">{renderValue(item.title)}</h3>
+                      )}
+                      {item.description && (
+                        <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{renderValue(item.description)}</p>
+                      )}
+                      {item.category && (
+                        <p className="text-sm text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
+                          {renderValue(item.category)}
+                        </p>
+                      )}
+                      {item.images && Array.isArray(item.images) && (
+                        <div className="mt-3">
+                          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            <i className="fa-solid fa-images mr-1"></i>
+                            {item.images.length} images
+                          </p>
+                          <div className="grid grid-cols-3 gap-2">
+                            {item.images.slice(0, 6).map((imageUrl, imgIndex) => (
+                              <img
+                                key={imgIndex}
+                                src={imageUrl}
+                                alt={`Gallery image ${imgIndex + 1}`}
+                                className="w-full h-16 object-cover rounded"
+                              />
+                            ))}
+                            {item.images.length > 6 && (
+                              <div className="w-full h-16 bg-gray-200 dark:bg-gray-600 rounded flex items-center justify-center text-xs text-gray-500">
+                                +{item.images.length - 6} more
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       )}
                     </>
                   ) : (
@@ -556,6 +737,26 @@ const Admin = () => {
     // Check both role-based and email-based admin access
     const adminEmails = ['dhruvsumra13@gmail.com']; // Add admin emails here
     return user?.role === 'admin' || adminEmails.includes(user?.email);
+  };
+
+  // When opening the add form for pastEvents, initialize formData with all fields
+  const handleShowAddForm = (sectionName) => {
+    if (sectionName === 'pastEvents') {
+      setFormData({
+        date: '',
+        location: '',
+        title: '',
+        body: '',
+        imageUrl: '',
+        overview: '',
+        highlights: '',
+        theme: '',
+        referenceLinks: '',
+      });
+    } else {
+      setFormData({});
+    }
+    setShowAddForm(true);
   };
 
   if (loading) {

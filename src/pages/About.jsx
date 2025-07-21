@@ -11,9 +11,8 @@ const About = () => {
   return (
     <div>
       <Hero/>
-      <Info/>
-      {/* <Mission/> */}
       <Leadership/>
+      <Info/>
       <Partners/>
       <CTA/>
       {/* <Footer/> */}

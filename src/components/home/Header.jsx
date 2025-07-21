@@ -16,6 +16,7 @@ const navLinks = [
   { path: "/events", label: "Events" },
   { path: "/publications", label: "Publications" },
   { path: "/resources", label: "Resources" },
+  { path: "/gallery", label: "Gallery" },
   // { path: "/gujarat-map", label: "Gujarat Map" },
   { path: "/contact", label: "Contact us" },
 ];
@@ -32,7 +33,7 @@ const Header = () => {
   // Function to check if current user is admin
   const isAdmin = () => {
     // Check both role-based and email-based admin access
-    const adminEmails = ['dhruvsumra13@gmail.com']; // Add admin emails here
+    const adminEmails = ['dhruvsumra13@gmail.com' , 'info@isamc.in']; // Add admin emails here
     return user?.role === 'admin' || adminEmails.includes(user?.email);
   };
 

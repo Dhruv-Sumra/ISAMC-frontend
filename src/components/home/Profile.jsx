@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "./ProfileIcon";
-import { Edit, Mail, Phone, User, Calendar } from "lucide-react";
+import { Edit, Mail, Phone, User, Calendar, Building, Briefcase, UserCheck, Award, CalendarDays, Linkedin } from "lucide-react";
 
 const Profile = () => {
   const { user, isAuthenticated } = useAuthStore();
@@ -32,12 +32,13 @@ const Profile = () => {
           <div className="flex flex-col  items-center mb-8">
             <ProfileIcon username={user?.name || user?.email} size={24} />
             <h2 className="mt-4 text-center text-2xl font-bold text-gray-900">
-              Profile
+              {user.name || user.email}
               <div className="border-2 rounded-full border-blue-500 m-auto w-2/6 md:w-2/3"></div>
             </h2>
           </div>
 
           <div className="space-y-6">
+            {/* Only show fields that are editable in EditProfile, in the same order and with the same labels */}
             <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
               <User className="w-5 h-5 text-blue-500" />
               <div>
@@ -45,16 +46,13 @@ const Profile = () => {
                 <p className="font-medium text-gray-900">{user.name || "Not provided"}</p>
               </div>
             </div>
-
-      
             <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
               <Mail className="w-5 h-5 text-blue-500" />
               <div>
                 <p className="text-sm text-gray-500">Email Address</p>
-                <p className="font-medium text-gray-900">{user.email}</p>
+                <p className="font-medium text-gray-900">{user.email || "Not provided"}</p>
               </div>
             </div>
-
             <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
               <Phone className="w-5 h-5 text-blue-500" />
               <div>
@@ -62,25 +60,65 @@ const Profile = () => {
                 <p className="font-medium text-gray-900">{user.contact || "Not provided"}</p>
               </div>
             </div>
-
-
-            {user.bio && (
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-500 mb-2">Bio</p>
-                <p className="text-gray-900">{user.bio}</p>
-              </div>
-            )}
-
-         <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
-              <Calendar className="w-5 h-5 text-blue-500" />
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <p className="text-sm text-gray-500 mb-2">Bio</p>
+              <p className="text-gray-900">{user.bio || "Not provided"}</p>
+            </div>
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <Building className="w-5 h-5 text-blue-500" />
               <div>
-                <p className="text-sm text-gray-500">Account Status</p>
+                <p className="text-sm text-gray-500">Institute</p>
+                <p className="font-medium text-gray-900">{user.institute || "Not provided"}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <Briefcase className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-gray-500">Designation (Area of Interest)</p>
+                <p className="font-medium text-gray-900">{user.designation || "Not provided"}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <UserCheck className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-gray-500">Gender</p>
+                <p className="font-medium text-gray-900">{user.gender || "Not provided"}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <Award className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-gray-500">Expertise</p>
+                <p className="font-medium text-gray-900">{user.expertise || "Not provided"}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <CalendarDays className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-gray-500">Year of Birth - Age</p>
                 <p className="font-medium text-gray-900">
-                  {user.isAccountVerified ? "Verified" : "Not Verified"}
+                  {user.dateOfBirth ? `${new Date(user.dateOfBirth).getFullYear()} (${new Date().getFullYear() - new Date(user.dateOfBirth).getFullYear()} years old)` : "Not provided"}
                 </p>
               </div>
             </div>
-
+            <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
+              <Linkedin className="w-5 h-5 text-blue-500" />
+              <div>
+                <p className="text-sm text-gray-500">LinkedIn Profile</p>
+                {user.linkedinUrl ? (
+                  <a 
+                    href={user.linkedinUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="font-medium text-blue-600 hover:text-blue-800 underline"
+                  >
+                    View Profile
+                  </a>
+                ) : (
+                  <span className="font-medium text-gray-900">Not provided</span>
+                )}
+              </div>
+            </div>
             <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
               <Calendar className="w-5 h-5 text-blue-500" />
               <div>

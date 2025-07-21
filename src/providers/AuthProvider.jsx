@@ -17,7 +17,28 @@ const AuthProvider = ({ children }) => {
   const [internalLoading, setInternalLoading] = useState(true);
 
   // List of public routes that don't require authentication
-  const publicRoutes = ['/login', '/register', '/forgot-password', '/reset-password', '/send-verify-otp', '/verify-email'];
+  const publicRoutes = [
+    '/',
+    '/about',
+    '/membership',
+    '/events',
+    '/publications',
+    '/resources',
+    '/gallery',
+    '/blogs',
+    '/contact',
+    '/top-side',
+    '/forgot-password',
+    '/reset-password',
+    '/send-verify-otp',
+    '/verify-email',
+    '/login',
+    '/register',
+    '/all-publications',
+    '/blogs/:id',
+    '/events/:id',
+    '/submit-paper'
+  ];
   
   // Check if current route is public
   const isPublicRoute = publicRoutes.includes(location.pathname);

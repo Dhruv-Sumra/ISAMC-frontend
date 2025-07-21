@@ -24,8 +24,8 @@ const Publications = () => {
     fetchEventsData();
   }, [fetchEventsData]);
 
-  // useMemo to memoize publications (for future extensibility)
-  const memoizedPublications = useMemo(() => publications, [publications]);
+  // useMemo to memoize publications and limit to 3 cards for home page
+  const memoizedPublications = useMemo(() => publications.slice(0, 3), [publications]);
 
   if (loading) {
     return (

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import data from "../../data/db.json";
 import Spinner from "../ui/Spinner";
 import api from "../../utils/api";    
+import { Link } from 'react-router-dom';
 
 const Publications = () => {
    const [publications, setPublications] = useState([]);
@@ -33,6 +34,9 @@ const Publications = () => {
      if (activeFilter === "All") return publications;
      return publications.filter((pub) => pub.category === activeFilter);
    }, [publications, activeFilter]);
+
+   // Only show the first 3 publications
+   const displayedPublications = filteredPublications.slice(0, 3);
 
    if (loading) {
      return (
@@ -94,7 +98,7 @@ const Publications = () => {
       </motion.div>
 
       <div className="px-5 md:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        {filteredPublications.map((item, index) => (
+        {displayedPublications.map((item, index) => (
           <motion.div
             key={index}
             className="bg-blue-50 dark:text-black shadow-md pb-5 md:pb-0 rounded-md relative flex flex-col items-center overflow-hidden"
@@ -142,14 +146,14 @@ const Publications = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
       >
-        <a href="">
+        <Link to="/all-publications">
           <motion.button
             className="font-semibold hover:text-blue-600 cursor-pointer text-blue-500 text-xl"
             whileHover={{ scale: 1.05 }}
           >
-            View all resources →
+            View all publications →
           </motion.button>
-        </a>
+        </Link>
       </motion.div>
     </motion.div>
   );

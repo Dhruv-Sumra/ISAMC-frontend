@@ -5,11 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Spinner from "../ui/Spinner";
 import api from "../../utils/api";  
+import { useNavigate } from 'react-router-dom';
 
 const PastEvents = () => {
    const [events, setEvents] = useState([]);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState(null);
+   const navigate = useNavigate();
 
    // useCallback to memoize fetchEventsData
    const fetchEventsData = useCallback(async () => {
@@ -110,46 +112,49 @@ const PastEvents = () => {
         <Slider {...settings}>
           {memoizedReversedEvents
             .filter(item => item.title)
-            .map((item, index) => (
-              <motion.div
-                key={item.id || item._id || index}
-                className="relative pb-5 h-105 dark:text-black   bg-blue-50 shadow-md rounded-md flex flex-col items-center overflow-hidden"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                {(item.img || item.imageUrl) && (
-                  <motion.img
-                    src={item.img || item.imageUrl}
-                    alt={item.title}
-                    className="w-full h-40 object-cover"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    whileHover={{ scale: 1.01 }}
-                  />
-                )}
-
-                <div className="p-4">
-                  <div className="space-y-1">
-                    <p>
-                      <i className="fa-solid fa-calendar-days text-blue-600"></i>{" "}
-                      {item.date?.day && item.date?.month ? (item.date.day + " " + item.date.month) : item.date}
-                    </p>
-                    {(item.location || item.venue) && (
+            .map((item, index) => {
+              const eventId = item.id || item._id || index; // Fallback to index if no id/_id
+              return (
+                <motion.div
+                  key={eventId}
+                  className="relative pb-5 h-105 dark:text-black   bg-blue-50 shadow-md rounded-md flex flex-col items-center overflow-hidden cursor-pointer hover:shadow-lg transition"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  onClick={() => navigate(`/events/${eventId}`)}
+                >
+                  {(item.img || item.imageUrl) && (
+                    <motion.img
+                      src={item.img || item.imageUrl}
+                      alt={item.title}
+                      className="w-full h-40 object-cover"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      whileHover={{ scale: 1.01 }}
+                    />
+                  )}
+                  <div className="p-4">
+                    <div className="space-y-1">
                       <p>
-                        <i className="fa-solid fa-location-dot text-blue-600"></i>{" "}
-                        {item.location || item.venue}
+                        <i className="fa-solid fa-calendar-days text-blue-600"></i>{" "}
+                        {item.date?.day && item.date?.month ? (item.date.day + " " + item.date.month) : item.date}
                       </p>
-                    )}
+                      {(item.location || item.venue) && (
+                        <p>
+                          <i className="fa-solid fa-location-dot text-blue-600"></i>{" "}
+                          {item.location || item.venue}
+                        </p>
+                      )}
+                    </div>
+                    <h2 className="text-xl font-semibold mt-3">{item.title}</h2>
+                    <p className="text-black mt-2">{item.body && item.body.length > 120 ? item.body.slice(0, 120) + '...' : item.body}</p>
                   </div>
-                  <h2 className="text-xl font-semibold mt-3">{item.title}</h2>
-                  <p className="text-black mt-2">{item.body}</p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
         </Slider>
       </div>
     </motion.div>

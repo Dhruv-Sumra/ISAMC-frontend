@@ -43,7 +43,7 @@ const News = () => {
 
   return (
     <motion.section
-      className="w-full bg-white py-16"
+      className="w-full bg-white dark:bg-gray-900 py-16"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -57,14 +57,12 @@ const News = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         >
-          <div className=" items-center mb-4">
-            
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
+          <div className="items-center mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">
               Latest News
             </h2>
-            <div className="w-1/9 h-0.5 bg-blue-600 mr-4"></div>
+            <div className="w-1/9 h-0.5 bg-blue-600 dark:bg-blue-400 mr-4"></div>
           </div>
-       
         </motion.div>
 
         {/* Featured News (First Article) */}
@@ -76,7 +74,7 @@ const News = () => {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
           >
-            <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm bg-white dark:bg-gray-800">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="relative overflow-hidden">
                   <img
@@ -85,22 +83,22 @@ const News = () => {
                     className="w-full h-64 lg:h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded uppercase tracking-wide">
+                    <span className="bg-blue-600 dark:bg-blue-500 text-white text-xs font-medium px-2 py-1 rounded uppercase tracking-wide">
                       Featured
                     </span>
                   </div>
                 </div>
                 <div className="p-6 lg:p-8 flex flex-col justify-center">
-                  <div className="flex items-center text-gray-500 text-xs mb-3">
-                    <i className="fa-solid fa-calendar-days mr-1 text-blue-600"></i>
+                  <div className="flex items-center text-gray-500 dark:text-gray-400 text-xs mb-3">
+                    <i className="fa-solid fa-calendar-days mr-1 text-blue-600 dark:text-blue-400"></i>
                     <time dateTime={memoizedNews[0].date}>{memoizedNews[0].date}</time>
                     <span className="mx-2">•</span>
                     <span>ISAMC News</span>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight overflow-hidden">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 leading-tight overflow-hidden">
                     {memoizedNews[0].title}
                   </h3>
-                  <p className="text-gray-700 text-sm leading-relaxed mb-4 overflow-hidden">
+                  <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4 overflow-hidden">
                     {memoizedNews[0].body}
                   </p>
                   <a 
@@ -109,7 +107,7 @@ const News = () => {
                     rel={memoizedNews[0].referenceUrl ? "noopener noreferrer" : undefined}
                     className={`inline-flex items-center font-medium text-sm transition-colors duration-200 ${
                       memoizedNews[0].referenceUrl 
-                        ? "text-blue-600 hover:text-blue-700 cursor-pointer" 
+                        ? "text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer" 
                         : "text-gray-400 cursor-not-allowed"
                     }`}
                     onClick={!memoizedNews[0].referenceUrl ? (e) => e.preventDefault() : undefined}
@@ -128,7 +126,7 @@ const News = () => {
           {memoizedNews.slice(1).map((item, index) => (
             <motion.article
               key={index}
-              className="border-b border-gray-100 py-6 last:border-b-0 hover:bg-gray-50 px-2 -mx-2 rounded transition-colors duration-200"
+              className="border-b border-gray-100 dark:border-gray-700 py-6 last:border-b-0 hover:bg-gray-50 dark:hover:bg-gray-800 px-2 -mx-2 rounded transition-colors duration-200"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -145,16 +143,16 @@ const News = () => {
                   </div>
                 </div>
                 <div className="md:col-span-3 flex flex-col justify-center">
-                  <div className="flex items-center text-gray-500 text-xs mb-2">
-                    <i className="fa-solid fa-calendar-days mr-1 text-blue-600"></i>
+                  <div className="flex items-center text-gray-500 dark:text-gray-400 text-xs mb-2">
+                    <i className="fa-solid fa-calendar-days mr-1 text-blue-600 dark:text-blue-400"></i>
                     <time dateTime={item.date}>{item.date}</time>
                     <span className="mx-2">•</span>
                     <span>ISAMC News</span>
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2 leading-tight hover:text-blue-600 transition-colors duration-200 overflow-hidden">
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 leading-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 overflow-hidden">
                     {item.title}
                   </h4>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3 overflow-hidden">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-3 overflow-hidden">
                     {item.body}
                   </p>
                   <a 
@@ -163,7 +161,7 @@ const News = () => {
                     rel={item.referenceUrl ? "noopener noreferrer" : undefined}
                     className={`inline-flex items-center font-medium text-sm transition-colors duration-200 ${
                       item.referenceUrl 
-                        ? "text-blue-600 hover:text-blue-700 cursor-pointer" 
+                        ? "text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer" 
                         : "text-gray-400 cursor-not-allowed"
                     }`}
                     onClick={!item.referenceUrl ? (e) => e.preventDefault() : undefined}

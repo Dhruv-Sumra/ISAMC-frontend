@@ -13,7 +13,7 @@ const Info = () => {
 
   return (
     <motion.div
-      className="px-5 md:px-15 w-full h-auto flex flex-col justify-between"
+      className="px-5 md:px-15 w-full h-auto flex flex-col justify-between mt-20 mb-10"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

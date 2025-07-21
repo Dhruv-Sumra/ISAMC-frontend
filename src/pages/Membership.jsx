@@ -10,12 +10,11 @@ const Membership = () => {
   return (
     <div>
       <Hero/>
-      <Info/>
       <Tier/>
+      <Info/>
       <Testimonials/> 
       <CTA/>
       {/* <Footer/> */}
-    
     </div>
   )
 }

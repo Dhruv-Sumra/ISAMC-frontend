@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import poster from "/src/assets/poster.jpeg";
+import poster from "/src/assets/poster.jpg";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 

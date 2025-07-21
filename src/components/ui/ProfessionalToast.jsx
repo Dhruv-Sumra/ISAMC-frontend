@@ -1,79 +1,51 @@
 import React from 'react';
 import { CheckCircle, XCircle, AlertCircle, Info } from 'lucide-react';
+import '../../styles/toast.css';
 
-const ProfessionalToast = ({ message, type = 'info', visible }) => {
-  const getToastStyles = () => {
-    const baseStyles = {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      padding: '16px 20px',
-      borderRadius: '12px',
-      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-      minWidth: '300px',
-      maxWidth: '400px',
-      fontSize: '14px',
-      fontWeight: '500',
-      border: '1px solid',
-      transform: visible ? 'translateX(0)' : 'translateX(100%)',
-      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      opacity: visible ? 1 : 0,
-    };
+const ICONS = {
+  success: <CheckCircle size={20} className="toast-icon success" />,
+  error: <XCircle size={20} className="toast-icon error" />,
+  warning: <AlertCircle size={20} className="toast-icon warning" />,
+  info: <Info size={20} className="toast-icon info" />,
+};
 
-    switch (type) {
-      case 'success':
-        return {
-          ...baseStyles,
-          background: '#f0fdf4',
-          color: '#166534',
-          borderColor: '#bbf7d0',
-          borderLeft: '4px solid #22c55e',
-        };
-      case 'error':
-        return {
-          ...baseStyles,
-          background: '#fef2f2',
-          color: '#dc2626',
-          borderColor: '#fecaca',
-          borderLeft: '4px solid #ef4444',
-        };
-      case 'warning':
-        return {
-          ...baseStyles,
-          background: '#fffbeb',
-          color: '#92400e',
-          borderColor: '#fed7aa',
-          borderLeft: '4px solid #f59e0b',
-        };
-      default:
-        return {
-          ...baseStyles,
-          background: '#f8fafc',
-          color: '#475569',
-          borderColor: '#e2e8f0',
-          borderLeft: '4px solid #3b82f6',
-        };
-    }
-  };
+const TITLES = {
+  success: 'Success',
+  error: 'Error',
+  warning: 'Warning',
+  info: 'Info',
+};
 
-  const getIcon = () => {
-    const iconSize = 20;
-    switch (type) {
-      case 'success':
-        return <CheckCircle size={iconSize} className="text-green-600" />;
-      case 'error':
-        return <XCircle size={iconSize} className="text-red-600" />;
-      case 'warning':
-        return <AlertCircle size={iconSize} className="text-amber-600" />;
-      default:
-        return <Info size={iconSize} className="text-blue-600" />;
-    }
-  };
-
+const ProfessionalToast = ({ message, type = 'info', visible, duration = 4000 }) => {
   return (
-    <div style={getToastStyles()}>
-      {getIcon()}
-      <span style={{ flex: 1 }}>{message}</span>
+    <div
+      className={`professional-toast ${type}`}
+      style={{
+        display: visible ? 'flex' : 'none',
+        alignItems: 'center',
+        gap: '12px',
+        position: 'relative',
+        minWidth: 300,
+        maxWidth: 400,
+        margin: '12px',
+        zIndex: 9999,
+        animation: visible ? 'slideInRight 0.4s cubic-bezier(0.4,0,0.2,1)' : 'slideOutRight 0.3s',
+      }}
+    >
+      {ICONS[type]}
+      <div className="toast-content">
+        <div className="toast-title">{TITLES[type]}</div>
+        <div className="toast-message">{message}</div>
+      </div>
+      {/* Progress bar */}
+      <div
+        className="toast-progress"
+        style={{
+          width: visible ? '100%' : 0,
+          animation: visible ? `progress ${duration}ms linear` : 'none',
+          background: 'rgba(0,0,0,0.08)',
+        }}
+      />
     </div>
   );
 };

@@ -13,6 +13,8 @@
     "@auth0/auth0-react": "^2.3.0",
     "@heroicons/react": "^2.2.0",
     "@react-oauth/google": "^0.12.2",
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.4.0",
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
     "bcrypt": "^6.0.0",
@@ -36,8 +38,10 @@
     "react-slick": "^0.30.3",
     "react-slideshow-image": "^4.3.2",
     "react-toastify": "^11.0.5",
+    "sib-api-v3-sdk": "^8.5.0",
     "slick-carousel": "^1.8.1",
     "toast": "^0.5.4",
+    "xlsx": "^0.18.5",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

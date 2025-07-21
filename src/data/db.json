@@ -240,6 +240,44 @@
       "date":"June 15, 2025",
       "title":"AI & Machine Learning Summit 2025",
       "body":"A premier gathering of AI innovators, industry leaders, and tech enthusiasts, discussing the latest advancements in AI and ML."
+    },
+    {
+      "id": 135,
+      "img": "https://www.un.org/sites/un2.un.org/files/2021/09/international-event.jpg",
+      "date": "July 20, 2025",
+      "title": "International Robotics Expo 2025",
+      "body": "A global showcase of robotics and automation, featuring innovators and companies from over 30 countries. Explore the future of robotics in industry, healthcare, and daily life. Location: Berlin, Germany."
+    },
+    {
+      "id": 136,
+      "img": "https://www.eventbrite.com/blog/wp-content/uploads/2022/01/other-events.jpg",
+      "date": "August 5, 2025",
+      "title": "Other: Emerging Tech Symposium",
+      "body": "A unique event focusing on emerging technologies beyond AI, including quantum computing, blockchain, and IoT. Open to all tech enthusiasts and professionals. Location: Virtual."
+    }
+  ],
+
+  "otherEvents":[
+    {
+      "id":201,
+      "img":"https://www.un.org/sites/un2.un.org/files/2021/09/international-event.jpg",
+      "date":"July 20, 2025",
+      "title":"International Robotics Expo 2025",
+      "body":"A global showcase of robotics and automation, featuring innovators and companies from over 30 countries. Explore the future of robotics in industry, healthcare, and daily life. Location: Berlin, Germany."
+    },
+    {
+      "id":202,
+      "img":"https://www.eventbrite.com/blog/wp-content/uploads/2022/01/other-events.jpg",
+      "date":"August 5, 2025",
+      "title":"Other: Emerging Tech Symposium",
+      "body":"A unique event focusing on emerging technologies beyond AI, including quantum computing, blockchain, and IoT. Open to all tech enthusiasts and professionals. Location: Virtual."
+    },
+    {
+      "id":203,
+      "img":"https://amchronicle.com/wp-content/uploads/2023/02/Additive-Manufacturing-Unit-or-3D-printer-Al-Seer-Marine-photo.jpg?ssl=1",
+      "date":"September 10, 2025",
+      "title":"AM Leadership Conference",
+      "body":"A conference dedicated to leadership in Additive Manufacturing, featuring workshops, panels, and networking with global AM experts. Location: Singapore."
     }
   ],
 

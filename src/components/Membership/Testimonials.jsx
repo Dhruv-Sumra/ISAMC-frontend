@@ -58,8 +58,8 @@ const Testimonials = () => {
               key={index}
               className={`px-2 py-4 h-auto md:h-80 transition-all duration-300 ease-in-out ${
                 index === currentSlide
-                  ? "transform scale-110 z-10"
-                  : "transform scale-95 opacity-90"
+                  ? "scale-110 z-10"
+                  : "scale-95 opacity-90"
               }`}
             >
               <div className="h-full bg-blue-50 shadow-md rounded-md flex flex-col items-center p-4 md:p-6">
